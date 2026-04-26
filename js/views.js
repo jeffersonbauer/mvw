@@ -112,7 +112,7 @@ window.MVW_VIEWS = (() => {
       { label: "Number of resorts", path: "resorts", unit: "vacation-ownership resorts", direction: "high" },
       { label: "New-buyer FICO (avg)", path: "avgFico", unit: "FICO", direction: "high" },
       { label: "Notes receivable (gross / net)", path: { mvw: "notesReceivableNet", hgv: "notesReceivableGross", tnl: "notesReceivableNet" }, unit: "USD millions", note: "MVW & TNL net; HGV gross", direction: "high" },
-      { label: "Inventory", path: "inventory", unit: "USD millions", direction: "neutral" },
+      { label: "Inventory", path: "inventory", unit: "USD millions", direction: "neutral", caption: "Real-estate inventory of unsold vacation-ownership interests — completed VOIs, WIP, and land/infrastructure carried at cost." },
 
       { label: "Capital return", isSection: true },
       { label: "Share repurchases (FY)", path: "buybacks", unit: "USD millions", direction: "high" },
@@ -164,7 +164,10 @@ window.MVW_VIEWS = (() => {
       };
 
       return `
-        <div class="sc-cell sc-cell--label">${escapeHtml(row.label)}${row.note ? ` <span class="muted">(${row.note})</span>` : ""}</div>
+        <div class="sc-cell sc-cell--label">
+          ${escapeHtml(row.label)}${row.note ? ` <span class="muted">(${row.note})</span>` : ""}
+          ${row.caption ? `<div class="sc-cell__caption">${escapeHtml(row.caption)}</div>` : ""}
+        </div>
         ${cell(0, m, "mvw")}
         ${cell(1, h, "hgv")}
         ${cell(2, t, "tnl")}
@@ -182,7 +185,7 @@ window.MVW_VIEWS = (() => {
     return `
       <div class="page-header">
         <div>
-          <h1>Vacation-Ownership Competitive Position — FY2025</h1>
+          <h1>Vacation Ownership Competitive Position</h1>
           <p>Side-by-side view of the three pure-play public timeshare operators. Click any company column to drill into Executive Overview, Segment Drill-Down, Global Footprint, Financial Deep Dive, Growth Catalysts, and Risk Matrix. Leader cell in each row is highlighted in gold.</p>
         </div>
         <span class="tag">FY2025 10-Ks</span>
@@ -205,19 +208,19 @@ window.MVW_VIEWS = (() => {
 
       <div class="grid grid--2" style="margin-top:32px;">
         <div class="panel">
-          <h2>Contract Sales — FY2025 vs FY2024</h2>
+          <h2>Contract Sales — FY2023 / FY2024 / FY2025</h2>
           <div class="chart-wrap"><canvas id="ov-chart-contract"></canvas></div>
-          <p class="muted" style="margin-top:12px;font-size:11px;">HGV consolidated gross contract sales benefit from a full year of Bluegreen post-acquisition (closed January 2024). MVW contract sales declined 3% on softer VPG.</p>
+          <p class="muted" style="margin-top:12px;font-size:11px;">HGV's step-up in FY2024 reflects the Bluegreen acquisition (closed January 2024). MVW contract sales declined 3% in FY2025 on softer VPG. TNL FY2023 not disclosed in FY2025 10-K operating-statistics table.</p>
         </div>
         <div class="panel">
-          <h2>VPG (Volume per Guest)</h2>
+          <h2>VPG (Volume per Guest) — 3-year</h2>
           <div class="chart-wrap"><canvas id="ov-chart-vpg"></canvas></div>
-          <p class="muted" style="margin-top:12px;font-size:11px;">VPG measures contract-sales productivity per tour. HGV leads on VPG growth (+8%); MVW retreated for the year.</p>
+          <p class="muted" style="margin-top:12px;font-size:11px;">VPG measures contract-sales productivity per tour. HGV leads on FY2025 growth (+8%); MVW has retreated for two years from $4,088 in FY2023. TNL FY2023 not disclosed.</p>
         </div>
         <div class="panel">
-          <h2>Tour Flow</h2>
+          <h2>Tour Flow — 3-year</h2>
           <div class="chart-wrap"><canvas id="ov-chart-tours"></canvas></div>
-          <p class="muted" style="margin-top:12px;font-size:11px;">HGV's tour base nearly doubled MVW's post-Bluegreen, reflecting the larger combined sales-distribution network.</p>
+          <p class="muted" style="margin-top:12px;font-size:11px;">HGV's tour base steps up sharply across FY2024/FY2025 post-Bluegreen, reflecting the larger combined sales-distribution network. TNL FY2023 not disclosed in FY2025 10-K.</p>
         </div>
         <div class="panel">
           <h2>Adjusted EBITDA Margin</h2>
@@ -266,21 +269,21 @@ window.MVW_VIEWS = (() => {
       const mark = co.brandColor;
       const accent = co.brandAccent || co.brandColor;
       return `
-        <div class="panel panel--accent" style="cursor:pointer;--brand-primary:${mark};--brand-primary-on-dark:${accent};border-top-color:${accent};" data-route="#/company/${slug}/exec">
-          <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-            <div style="width:40px;height:40px;border-radius:6px;background:${mark};color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;">${short}</div>
-            <div>
-              <div style="font-weight:600;font-size:15px;">${full}</div>
-              <div style="font-size:11px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.6px;">${ticker}</div>
+        <div class="panel panel--accent hero-card" style="--brand-primary:${mark};--brand-primary-on-dark:${accent};border-top-color:${accent};" data-route="#/company/${slug}/exec">
+          <div class="hero-card__head">
+            <div class="hero-card__mark" style="background:${mark};">${short}</div>
+            <div class="hero-card__title">
+              <div class="hero-card__name">${full}</div>
+              <div class="hero-card__ticker">${ticker}</div>
             </div>
-            <div style="margin-left:auto;color:var(--text-tertiary);">→</div>
+            <div class="hero-card__arrow">→</div>
           </div>
-          <div class="num" style="font-size:24px;font-weight:600;">${fmtNumber(co.headlineKpis.revenue.value, "USD millions")}<span class="kpi__unit"> revenue</span></div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.5;">${co.narrative.oneLiner}</div>
-          <div style="display:flex;gap:16px;margin-top:14px;font-size:11px;color:var(--text-tertiary);">
-            <div><span class="num" style="color:var(--text-primary);font-size:14px;">${fmtNumber(co.headlineKpis.adjEbitda.value, "USD millions")}</span> Adj EBITDA</div>
-            <div><span class="num" style="color:var(--text-primary);font-size:14px;">${co.headlineKpis.resorts.value}+</span> resorts</div>
-            <div><span class="num" style="color:var(--text-primary);font-size:14px;">${(co.headlineKpis.owners.value / 1000).toFixed(0)}k</span> owners</div>
+          <div class="hero-card__revenue num">${fmtNumber(co.headlineKpis.revenue.value, "USD millions")}<span class="kpi__unit"> revenue</span></div>
+          <div class="hero-card__desc">${co.narrative.oneLiner}</div>
+          <div class="hero-card__stats">
+            <div><span class="num">${fmtNumber(co.headlineKpis.adjEbitda.value, "USD millions")}</span> Adj EBITDA</div>
+            <div><span class="num">${co.headlineKpis.resorts.value}+</span> resorts</div>
+            <div><span class="num">${(co.headlineKpis.owners.value / 1000).toFixed(0)}k</span> owners</div>
           </div>
         </div>
       `;
@@ -289,25 +292,27 @@ window.MVW_VIEWS = (() => {
 
   function afterOverview() {
     const D = window.MVW_DATA.companies;
+    const labels3 = ["FY2023", "FY2024", "FY2025"];
+    const series = (k) => [k.prior2 ?? null, k.prior, k.value];
     MVW_CHARTS.comparativeBars("ov-chart-contract", {
-      labels: ["FY2024", "FY2025"],
-      mvw: [D.mvw.headlineKpis.contractSales.prior, D.mvw.headlineKpis.contractSales.value],
-      hgv: [D.hgv.headlineKpis.contractSales.prior, D.hgv.headlineKpis.contractSales.value],
-      tnl: [D.tnl.headlineKpis.contractSales.prior, D.tnl.headlineKpis.contractSales.value],
+      labels: labels3,
+      mvw: series(D.mvw.headlineKpis.contractSales),
+      hgv: series(D.hgv.headlineKpis.contractSales),
+      tnl: series(D.tnl.headlineKpis.contractSales),
       currency: true, unit: "M"
     });
     MVW_CHARTS.comparativeBars("ov-chart-vpg", {
-      labels: ["FY2024", "FY2025"],
-      mvw: [D.mvw.headlineKpis.vpg.prior, D.mvw.headlineKpis.vpg.value],
-      hgv: [D.hgv.headlineKpis.vpg.prior, D.hgv.headlineKpis.vpg.value],
-      tnl: [D.tnl.headlineKpis.vpg.prior, D.tnl.headlineKpis.vpg.value],
+      labels: labels3,
+      mvw: series(D.mvw.headlineKpis.vpg),
+      hgv: series(D.hgv.headlineKpis.vpg),
+      tnl: series(D.tnl.headlineKpis.vpg),
       currency: true
     });
     MVW_CHARTS.comparativeBars("ov-chart-tours", {
-      labels: ["FY2024", "FY2025"],
-      mvw: [D.mvw.headlineKpis.tours.prior, D.mvw.headlineKpis.tours.value],
-      hgv: [D.hgv.headlineKpis.tours.prior, D.hgv.headlineKpis.tours.value],
-      tnl: [D.tnl.headlineKpis.tours.prior, D.tnl.headlineKpis.tours.value],
+      labels: labels3,
+      mvw: series(D.mvw.headlineKpis.tours),
+      hgv: series(D.hgv.headlineKpis.tours),
+      tnl: series(D.tnl.headlineKpis.tours),
       currency: false
     });
     MVW_CHARTS.comparativeBars("ov-chart-margin", {
@@ -432,6 +437,21 @@ window.MVW_VIEWS = (() => {
         </div>
       ` : ""}
 
+      ${co.recentCall ? `
+        <div class="panel" style="margin-top:24px;">
+          <h2>Most recent earnings call — key items</h2>
+          <div class="callout" style="margin-bottom:16px;">
+            <strong>${escapeHtml(co.recentCall.period)} call</strong> · released ${escapeHtml(co.recentCall.date)} · paraphrased from primary-source press release.
+          </div>
+          <ul class="call-list">
+            ${co.recentCall.items.map(item => `<li>${escapeHtml(item)}</li>`).join("")}
+          </ul>
+          <div class="call-source">
+            Source: <a href="${escapeHtml(co.recentCall.sourceUrl)}" target="_blank" rel="noopener">${escapeHtml(co.recentCall.sourceLabel)}</a>
+          </div>
+        </div>
+      ` : ""}
+
       ${sourcesBlock(co.sources)}
     `;
   }
@@ -494,6 +514,9 @@ window.MVW_VIEWS = (() => {
               <th>Brand</th>
               ${co.brands[0].resorts !== undefined ? `<th class="num">Resorts</th>` : ""}
               ${co.brands[0].keys !== undefined ? `<th class="num">Keys</th>` : ""}
+              <th class="num">Tours</th>
+              <th class="num">Contract sales</th>
+              <th class="num">VPG</th>
               <th>${co.brands[0].licensor ? "Licensor / Type" : "Type"}</th>
             </tr>
           </thead>
@@ -503,11 +526,17 @@ window.MVW_VIEWS = (() => {
                 <td><strong>${escapeHtml(b.name)}</strong>${b.note ? `<div class="muted" style="font-size:11px;">${escapeHtml(b.note)}</div>` : ""}</td>
                 ${co.brands[0].resorts !== undefined ? `<td class="num">${b.resorts !== undefined ? b.resorts : "—"}</td>` : ""}
                 ${co.brands[0].keys !== undefined ? `<td class="num">${b.keys !== undefined ? b.keys.toLocaleString() : "—"}</td>` : ""}
+                <td class="num">${b.tours !== undefined ? b.tours.toLocaleString() : "—"}</td>
+                <td class="num">${b.contractSales !== undefined ? fmtNumber(b.contractSales, "USD millions") : "—"}</td>
+                <td class="num">${b.vpg !== undefined ? "$" + b.vpg.toLocaleString() : "—"}</td>
                 <td>${escapeHtml(b.licensor || b.type || "")}</td>
               </tr>
             `).join("")}
           </tbody>
         </table>
+        <p class="muted" style="font-size:11px;margin-top:12px;">
+          Tours, contract sales, and VPG are <strong>not disclosed at the individual-brand level</strong> in any of the three peers' 10-K filings — these operating metrics are reported only at the consolidated company or operating-segment level. See the <em>Executive Overview</em> tab (consolidated KPIs) and the <em>Segment detail</em> table above (segment-level revenue and Adj EBITDA).
+        </p>
       </div>
 
       ${sourcesBlock(co.sources)}

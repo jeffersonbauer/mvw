@@ -67,3 +67,15 @@ Manual. Refresh after each company's annual 10-K filing (typically Feb–Mar) or
 
 - Should we add a "1-pager" PDF export of the comparative overview? (Not built; flag for v2 if the user asks.)
 - Should risk severity × likelihood scores be moved to a separate analyst-input file rather than mixed into the SEC-sourced data block? (Currently inline with a clear "analyst-coded" label.)
+
+---
+
+## 2026-04-26 — Scope additions (user request)
+
+- **Overview bar charts now show 3 years (FY2023 / FY2024 / FY2025)** for contract sales, VPG, and tours. TNL FY2023 operating stats are not disclosed in the FY2025 10-K (the MD&A operating-statistics table only shows 2025 and 2024) — those data points render as gaps with a footnote.
+- **Financial Deep Dive trend charts now show 3 years** (revenue and Adj EBITDA) for all three companies. MVW FY2023 revenue ($4,727M) and Adj EBITDA ($761M) added from the FY2025 10-K 3-year comparative income statement and 3-year non-GAAP reconciliation. TNL FY2023 revenue ($3,750M) added from the consolidated income statement; TNL FY2023 Adj EBITDA ($908M) derived from the segment-footnote 3-year segment reconciliation (VO $729M + T&M $247M + intersegment $(1)M + Other $(67)M).
+- **Executive Overview tab** adds a "Most recent earnings call — key items" section per company, paraphrased from the Feb 2026 Q4/FY2025 release for MVW and HGV, and the Apr 22, 2026 Q1 2026 release for TNL. Source URLs cited. No third-party transcript sites used.
+- **Segment Drill-Down brand portfolio** adds Tours, Contract Sales, and VPG columns. Per all three FY2025 10-Ks, these operating metrics are *not disclosed at the individual-brand level* — companies report at consolidated / operating-segment granularity. All brand-level cells therefore render "—" with a footnote pointing executives to the Executive Overview (consolidated) and segment table (segment-level).
+- **Overview scorecard** now carries a one-line caption under the Inventory KPI label clarifying that "Inventory" = real-estate inventory of unsold vacation-ownership interests (completed VOIs, WIP, land/infrastructure carried at cost).
+- **Title** changed: "Vacation-Ownership Competitive Position — FY2025" → "Vacation Ownership Competitive Position".
+- **Out-of-scope clarification:** brand-level KPIs (per-brand VPG, tours, contract sales) remain out of scope for analyst-derived data — to be added only if a company starts disclosing them.

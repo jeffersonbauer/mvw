@@ -64,9 +64,9 @@ window.MVW_DATA = {
         currentChapter: "FY2025 was a reset year: $577M of non-cash impairment charges (primarily Welk-legacy Hyatt-branded inventory and Asia-Pacific assets) drove a GAAP net loss of $(308)M, despite Adjusted EBITDA of $751M (margin 22.5%) on revenue of $5.0B. Management launched a multi-year Strategic Business Operations modernization program ($122M of 2025 charges) targeting cost savings and tighter capital discipline. Corporate-debt-net-of-cash to Adjusted EBITDA leverage stood at 4.2x at year end."
       },
       headlineKpis: {
-        revenue: { value: 5032, prior: 4967, unit: "USD millions", source: "10-K FY2025, Consolidated Statements of Income" },
+        revenue: { value: 5032, prior: 4967, prior2: 4727, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, Consolidated Statements of Income (3-year comparative)" },
         revenueExclReimb: { value: 3334, unit: "USD millions", source: "10-K FY2025, MD&A" },
-        adjEbitda: { value: 751, prior: 736, unit: "USD millions", source: "10-K FY2025, MD&A non-GAAP reconciliation" },
+        adjEbitda: { value: 751, prior: 736, prior2: 761, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, MD&A non-GAAP reconciliation (3-year comparative)" },
         adjEbitdaMargin: { value: 22.5, unit: "percent", calc: "Adj EBITDA / revenue excl. cost reimbursements", source: "10-K FY2025, MD&A" },
         netIncome: { value: -308, prior: 218, unit: "USD millions", source: "10-K FY2025, Consolidated Statements of Income", note: "Net loss attributable to common stockholders; driven by $577M non-cash impairment, $122M modernization charges, $15M restructuring" },
         dilutedEps: { value: -8.84, prior: 5.61, unit: "USD per share", source: "10-K FY2025, EPS reconciliation" },
@@ -79,9 +79,9 @@ window.MVW_DATA = {
         dividend: { value: 3.20, unit: "USD per share annualized", source: "10-K FY2025, Item 5", note: "Q4'25 declaration $0.80/share" },
         dividendsPaid: { value: 110, unit: "USD millions", source: "10-K FY2025, Cash Flow Statement" },
         buybacks: { value: 61, unit: "USD millions", source: "10-K FY2025, Item 5", note: "1,004,613 shares at $61.26 avg; $322M remaining authorization" },
-        contractSales: { value: 1762, prior: 1813, unit: "USD millions", source: "10-K FY2025, MD&A", note: "Down 3% YoY" },
-        vpg: { value: 3794, prior: 3911, unit: "USD per guest", source: "10-K FY2025, MD&A", note: "Down 3% YoY" },
-        tours: { value: 431974, prior: 432716, unit: "tours", source: "10-K FY2025, MD&A", note: "Approximately flat YoY" },
+        contractSales: { value: 1762, prior: 1813, prior2: 1772, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, MD&A (3-year comparative)", note: "Down 3% YoY" },
+        vpg: { value: 3794, prior: 3911, prior2: 4088, prior2Year: 2023, unit: "USD per guest", source: "10-K FY2025, MD&A (3-year comparative)", note: "Down 3% YoY" },
+        tours: { value: 431974, prior: 432716, prior2: 405825, prior2Year: 2023, unit: "tours", source: "10-K FY2025, MD&A (3-year comparative)", note: "Approximately flat YoY" },
         owners: { value: 700000, unit: "owner families", source: "10-K FY2025, Item 1 Business", note: "Approximate; from ~420,000 at 2011 spin-off" },
         existingOwnerMix: { value: 70, unit: "percent of contract sales", source: "10-K FY2025, Item 1", note: "Implies ~30% new buyer mix" },
         avgFico: { value: 740, prior: 737, unit: "FICO", source: "10-K FY2025, MD&A", note: "76% over 700, 91% over 650, 98% over 600" },
@@ -166,11 +166,12 @@ window.MVW_DATA = {
       },
       financials: {
         revenueTrend: [
-          { year: 2023, value: null, source: null },
+          { year: 2023, value: 4727, source: "10-K FY2025 Consolidated Statements of Income, 3-year comparative" },
           { year: 2024, value: 4967, source: "10-K FY2025, comparative" },
           { year: 2025, value: 5032, source: "10-K FY2025" }
         ],
         ebitdaTrend: [
+          { year: 2023, value: 761, source: "10-K FY2025 MD&A non-GAAP reconciliation, 3-year comparative" },
           { year: 2024, value: 736, source: "10-K FY2025, comparative" },
           { year: 2025, value: 751, source: "10-K FY2025" }
         ],
@@ -228,9 +229,24 @@ window.MVW_DATA = {
         { title: "Spanish timeshare litigation", severity: 3, likelihood: 4, verbatim: "Spanish court rulings voiding certain timeshare contracts have increased our exposure to litigation that may materially adversely affect our business and financial condition.", source: "10-K FY2025, Item 1A", note: "1999 Spanish law limiting contract duration; 2015 rulings continue to drive claim volume." },
         { title: "Regulatory compliance burden", severity: 3, likelihood: 3, verbatim: "Our business is extensively regulated, and any failure to comply with applicable laws could materially adversely affect our business.", source: "10-K FY2025, Item 1A" }
       ],
+      recentCall: {
+        period: "Q4 / FY2025",
+        date: "2026-02-25",
+        sourceLabel: "MVW Q4/FY2025 press release (Feb 25, 2026)",
+        sourceUrl: "https://ir.marriottvacationsworldwide.com/news-releases/news-release-details/marriott-vacations-worldwide-reports-fourth-quarter-and-full-9",
+        items: [
+          "Q4 Adjusted EBITDA landed at the high end of guidance; FY2025 Adjusted EBITDA $751M on consolidated contract sales of $1.8B.",
+          "CEO Matt Avril said the company is \"moving with urgency, making the required difficult decisions to strengthen the long-term trajectory of the business\"; Mike Flaskey appointed President & COO to accelerate operational execution.",
+          "2026 strategic priorities: profitability enhancement, cost discipline, capital allocation, inventory reduction, and improved operating cash flow. 2026 guidance is non-GAAP, excluding asset sales, FX, restructuring, modernization, and impairments.",
+          "FY2025 GAAP net loss of $308M reflected $577M of non-cash impairment charges plus modernization/restructuring expense; adjusted diluted EPS of $7.16 for the year ($1.86 in Q4).",
+          "$171M returned to shareholders in FY2025 via dividends and buybacks; sales reserve held at 12.7% of contract sales (net of resales); delinquencies declined for a 4th straight quarter.",
+          "Subsequent events: repaid $575M of convertible debt in January 2026; sold Westin Resort & Spa Cancun for $50M; agreed to acquire 64 timeshare units in Puerto Vallarta for $46M (delivery late 2028)."
+        ]
+      },
       sources: [
         { label: "FY2025 10-K (filed Feb 2026)", url: "https://www.sec.gov/Archives/edgar/data/1524358/000152435826000010/vac-20251231.htm" },
         { label: "Q3 2025 10-Q (filed Nov 2025)", url: "https://www.sec.gov/Archives/edgar/data/1524358/000152435825000166/0001524358-25-000166-index.htm" },
+        { label: "Q4/FY2025 earnings press release (Feb 25, 2026)", url: "https://ir.marriottvacationsworldwide.com/news-releases/news-release-details/marriott-vacations-worldwide-reports-fourth-quarter-and-full-9" },
         { label: "EDGAR filings index (CIK 0001524358)", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001524358&type=10-K" },
         { label: "Investor Relations", url: "https://ir.mvwc.com" }
       ]
@@ -266,8 +282,8 @@ window.MVW_DATA = {
         currentChapter: "FY2025 was the first full year post-Bluegreen integration. Revenue stable at $5.0B and contract sales grew 10% to $3.3B with VPG up 8% to $3,851. Adjusted EBITDA stepped down to $969M (from $1.094B in FY2024) reflecting a higher mix of acquired/lower-margin business and continued integration costs ($98M in FY2025). HGV continued aggressive capital return — $600M of share repurchases — while carrying ~$4.5B of corporate debt plus $2.7B of non-recourse securitized debt. Default rates at 9.86% (improved from 10.77% in FY2024)."
       },
       headlineKpis: {
-        revenue: { value: 5047, prior: 4981, unit: "USD millions", source: "10-K FY2025, Consolidated Statements of Operations" },
-        adjEbitda: { value: 969, prior: 1094, unit: "USD millions", source: "10-K FY2025, MD&A" },
+        revenue: { value: 5047, prior: 4981, prior2: 3978, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, Consolidated Statements of Operations (3-year comparative)" },
+        adjEbitda: { value: 969, prior: 1094, prior2: 1005, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, MD&A non-GAAP reconciliation (3-year comparative)" },
         adjEbitdaAttributable: { value: 950, prior: 1078, unit: "USD millions", source: "10-K FY2025, MD&A", note: "Adj EBITDA attributable to stockholders" },
         adjEbitdaMargin: { value: 19.2, unit: "percent", calc: "Adj EBITDA / total revenue", source: "calculated" },
         netIncome: { value: 99, prior: 60, unit: "USD millions", source: "10-K FY2025, Consolidated Statements of Operations" },
@@ -279,9 +295,9 @@ window.MVW_DATA = {
         corporateDebt: { value: 4545, unit: "USD millions", source: "10-K FY2025, Footnote 15", note: "Net of issuance costs; gross $4,603M" },
         securitizedDebt: { value: 2716, unit: "USD millions", source: "10-K FY2025, Footnote 15", note: "Non-recourse; gross $2,751M" },
         buybacks: { value: 600, prior: 432, unit: "USD millions", source: "10-K FY2025, Cash Flow Statement", note: "FY2023: $368M. 15M shares retired for $605M" },
-        contractSales: { value: 3314, prior: 3002, unit: "USD millions", source: "10-K FY2025, Key Metrics", note: "Up 10% YoY" },
-        vpg: { value: 3851, prior: 3572, unit: "USD per guest", source: "10-K FY2025, Key Metrics", note: "Up 7.8% YoY" },
-        tours: { value: 856676, prior: 835181, unit: "tours", source: "10-K FY2025, Key Metrics" },
+        contractSales: { value: 3314, prior: 3002, prior2: 2310, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, Real Estate Sales Operating Metrics (3-year comparative)", note: "Up 10% YoY" },
+        vpg: { value: 3851, prior: 3572, prior2: 3760, prior2Year: 2023, unit: "USD per guest", source: "10-K FY2025, Real Estate Sales Operating Metrics (3-year comparative)", note: "Up 7.8% YoY" },
+        tours: { value: 856676, prior: 835181, prior2: 608367, prior2Year: 2023, unit: "tours", source: "10-K FY2025, Real Estate Sales Operating Metrics (3-year comparative)" },
         owners: { value: 720000, unit: "Club members (>720,000)", source: "10-K FY2025, Item 1", note: "Across HGV Club offerings, including Hilton Grand Vacations Club, Hilton Vacation Club, Hilton Club, HGV Max" },
         avgFico: { value: 734, prior: 741, unit: "FICO", source: "10-K FY2025, TFR Note", note: "Weighted-average for new originations; FY2023: 737" },
         notesReceivableGross: { value: 4314, unit: "USD millions", source: "10-K FY2025, Note 8", note: "Originated $3,665M + acquired $649M; reserves $1,233M" },
@@ -406,9 +422,24 @@ window.MVW_DATA = {
         { title: "Substantial indebtedness / variable-rate exposure", severity: 4, likelihood: 3, verbatim: "Our substantial indebtedness and other contractual obligations, restrictions imposed on us by certain of our debt agreements and instruments and our variable rate indebtedness which subjects us to interest rate risk.", source: "10-K FY2025, Item 1A", note: "~$2.9B notional variable-rate debt = ~40% of total indebtedness." },
         { title: "Industry competition", severity: 3, likelihood: 5, verbatim: "We operate in a highly competitive industry.", source: "10-K FY2025, Item 1A" }
       ],
+      recentCall: {
+        period: "Q4 / FY2025",
+        date: "2026-02-26",
+        sourceLabel: "HGV Q4/FY2025 press release (Feb 26, 2026)",
+        sourceUrl: "https://www.businesswire.com/news/home/20260225672718/en/Hilton-Grand-Vacations-Reports-Fourth-Quarter-and-Full-Year-2025-Results",
+        items: [
+          "CEO Mark Wang: \"We generated strong results in the fourth quarter, with growth in contract sales and EBITDA, in addition to expanding our margins.\" Q4 contract sales $852M (+1.8% YoY), Q4 revenue $1.333B, Q4 Adj EBITDA attributable to stockholders $292M.",
+          "Wang said HGV \"delivered on the expectations we set for the full year, finishing in the upper half of our guidance range while returning a record amount of capital to shareholders,\" characterizing FY2025 as \"a year of meaningful progress.\"",
+          "Continued investment in lead generation, execution improvements, and product evolution — consistent with ongoing Bluegreen integration and the rollout of HGV Max to legacy Bluegreen members.",
+          "2026 outlook: full-year Adj EBITDA attributable to stockholders (excluding deferrals/recognitions) expected in a range of $1.185B to $1.225B.",
+          "Q4 GAAP net income attributable to stockholders $48M ($0.55 diluted EPS); adjusted net income $76M; adjusted diluted EPS $0.88.",
+          "Detailed VPG, NOG, and member-count call commentary not retrievable via primary-source fetch in this refresh — see the 8-K Exhibit 99.1 (Feb 26, 2026) on EDGAR for the full release."
+        ]
+      },
       sources: [
         { label: "FY2025 10-K (filed Feb 26, 2026)", url: "https://www.sec.gov/Archives/edgar/data/1674168/000167416826000017/hgv-20251231.htm" },
         { label: "Q3 2025 10-Q (filed Oct 30, 2025)", url: "https://www.sec.gov/Archives/edgar/data/1674168/000167416825000019/hgv-20250930.htm" },
+        { label: "Q4/FY2025 earnings press release (Feb 26, 2026)", url: "https://www.businesswire.com/news/home/20260225672718/en/Hilton-Grand-Vacations-Reports-Fourth-Quarter-and-Full-Year-2025-Results" },
         { label: "EDGAR filings index (CIK 0001674168)", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001674168" },
         { label: "Investor Relations", url: "https://investors.hgv.com" }
       ]
@@ -444,8 +475,8 @@ window.MVW_DATA = {
         currentChapter: "FY2025 was a record year on the operating side: revenue $4.0B (+4%), Adjusted EBITDA $990M (+7%), Gross VOI sales $2.49B (+8%), VPG $3,284 (+6%), tours +2.5%. Operating cash flow was particularly strong at $640M. Net income compressed to $230M (vs. $411M FY2024) reflecting $216M of inventory write-downs from a resort-optimization initiative expected to drive 2026+ EBITDA accretion. RCI segment continues to face member-base headwinds (3.3M members down from prior year), partially offset by the higher-growth Travel Club business. Q1 2026: revenue $961M, Adj EBITDA $225M, NI $79M. Post-year Board increased buyback authorization by $750M."
       },
       headlineKpis: {
-        revenue: { value: 4021, prior: 3864, unit: "USD millions", source: "10-K FY2025, Consolidated Statements of Income" },
-        adjEbitda: { value: 990, prior: 929, unit: "USD millions", source: "10-K FY2025, MD&A non-GAAP reconciliation" },
+        revenue: { value: 4021, prior: 3864, prior2: 3750, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, Consolidated Statements of Income (3-year comparative)" },
+        adjEbitda: { value: 990, prior: 929, prior2: 908, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, segment footnote (FY2023 derived from segment Adj EBITDA reconciliation)" },
         adjEbitdaMargin: { value: 24.6, unit: "percent", calc: "Adj EBITDA / total revenue", source: "calculated" },
         netIncome: { value: 230, prior: 411, unit: "USD millions", source: "10-K FY2025", note: "Net income attributable to TNL shareholders; FY2025 includes $216M inventory write-downs (resort-optimization initiative)" },
         dilutedEps: { value: 3.44, prior: 5.35, unit: "USD per share", source: "10-K FY2025", note: "Continuing operations" },
@@ -457,9 +488,9 @@ window.MVW_DATA = {
         dividend: { value: 2.24, unit: "USD per share annualized", source: "10-K FY2025, Item 7", note: "$0.56 per quarter, all four quarters of 2025" },
         dividendsPaid: { value: 149, prior: 142, unit: "USD millions", source: "10-K FY2025, Cash Flow Statement" },
         buybacks: { value: 300, unit: "USD millions", source: "10-K FY2025, Item 7", note: "$301M cash paid; post-year Board increased authorization by $750M" },
-        contractSales: { value: 2486, prior: 2293, unit: "USD millions", source: "10-K FY2025, Key Metrics", note: "Gross VOI sales; up 8.4% YoY" },
-        vpg: { value: 3284, prior: 3094, unit: "USD per guest", source: "10-K FY2025, Key Metrics", note: "Up 6.1% YoY" },
-        tours: { value: 734000, prior: 716000, unit: "tours", source: "10-K FY2025, Key Metrics", note: "Up 2.5% YoY" },
+        contractSales: { value: 2486, prior: 2293, prior2: null, prior2Year: 2023, unit: "USD millions", source: "10-K FY2025, Key Metrics", note: "Gross VOI sales; up 8.4% YoY. FY2023 not disclosed — TNL FY2025 10-K MD&A operating-statistics table shows only 2025 and 2024." },
+        vpg: { value: 3284, prior: 3094, prior2: null, prior2Year: 2023, unit: "USD per guest", source: "10-K FY2025, Key Metrics", note: "Up 6.1% YoY. FY2023 not disclosed in FY2025 10-K." },
+        tours: { value: 734000, prior: 716000, prior2: null, prior2Year: 2023, unit: "tours", source: "10-K FY2025, Key Metrics", note: "Up 2.5% YoY. FY2023 not disclosed in FY2025 10-K." },
         owners: { value: 797000, unit: "owner families", source: "10-K FY2025, Item 1" },
         upgradeMix: { value: 67, prior: 64, unit: "percent of transactions to existing owners", source: "10-K FY2025", note: "Implies ~33% new-owner mix" },
         avgFico: { value: 746, prior: 744, unit: "FICO", source: "10-K FY2025, TFR Note", note: "Weighted-average for new originations — highest among the three peers" },
@@ -535,10 +566,12 @@ window.MVW_DATA = {
       },
       financials: {
         revenueTrend: [
+          { year: 2023, value: 3750, source: "10-K FY2025 Consolidated Statements of Income, 3-year comparative" },
           { year: 2024, value: 3864, source: "10-K FY2025, comparative" },
           { year: 2025, value: 4021, source: "10-K FY2025" }
         ],
         ebitdaTrend: [
+          { year: 2023, value: 908, source: "10-K FY2025 segment footnote — FY2023 segment Adj EBITDA reconciliation (VO $729 + T&M $247 − intersegment $1 + Other $(67))" },
           { year: 2024, value: 929, source: "10-K FY2025, comparative" },
           { year: 2025, value: 990, source: "10-K FY2025" }
         ],
@@ -596,9 +629,24 @@ window.MVW_DATA = {
         { title: "Regulatory compliance burden", severity: 3, likelihood: 4, verbatim: "Our business is subject to extensive regulation and the cost of compliance or failure to comply with such regulations may adversely affect us.", source: "10-K FY2025, Item 1A" },
         { title: "Wyndham Hotels relationship", severity: 4, likelihood: 1, verbatim: "Our success depends in part on our ongoing relationship with Wyndham Hotels.", source: "10-K FY2025, Item 1A" }
       ],
+      recentCall: {
+        period: "Q1 2026",
+        date: "2026-04-22",
+        sourceLabel: "TNL Q1 2026 press release (Apr 22, 2026)",
+        sourceUrl: "https://investor.travelandleisureco.com/news-events/press-releases/detail/955/travel-leisure-co-reports-first-quarter-2026-results",
+        items: [
+          "CEO Michael Brown: \"We're off to a strong start to 2026, with positive momentum in our Vacation Ownership business.\" Q1 net revenue $961M, net income $79M ($1.22 diluted EPS), Adj EBITDA $225M (+11% YoY); adjusted diluted EPS up 31% to $1.45.",
+          "Vacation Ownership: gross VOI sales $549M (+7% YoY) on +5% tours and a +3% VPG to $3,321; net VOI sales +11% to $427M; segment Adj EBITDA +20% to $191M.",
+          "Capital return: $128M to shareholders in Q1 ($41M dividends at $0.60/share + $87M buybacks at avg $72.51); $832M remaining repurchase authorization; Q2 dividend held flat at $0.60.",
+          "Guidance: Q2 2026 Adj EBITDA expected $260–270M; full-year 2026 Adj EBITDA reaffirmed at $1,030–1,055M.",
+          "Resort-optimization initiative: 17 underperforming resorts identified for portfolio optimization; $19M of Q1 inventory write-downs; objective is to reduce maintenance-fee pressure and generate annual savings.",
+          "Brand expansion: continued growth from Margaritaville and Eddie Bauer Adventure Club; announced 4th Sports Illustrated Resorts location (Baton Rouge — LSU / Southern University markets). Travel & Membership revenue −8% to $165M on a 10% decrease in revenue per transaction and richer travel-club mix."
+        ]
+      },
       sources: [
         { label: "FY2025 10-K (filed Feb 18, 2026)", url: "https://www.sec.gov/Archives/edgar/data/1361658/000136165826000009/tnl-20251231.htm" },
         { label: "Q1 2026 10-Q (filed Apr 22, 2026)", url: "https://www.sec.gov/Archives/edgar/data/1361658/000136165826000027/wyn-20260331.htm" },
+        { label: "Q1 2026 earnings press release (Apr 22, 2026)", url: "https://investor.travelandleisureco.com/news-events/press-releases/detail/955/travel-leisure-co-reports-first-quarter-2026-results" },
         { label: "EDGAR filings index (CIK 0001361658)", url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001361658" },
         { label: "Investor Relations", url: "https://investor.travelandleisureco.com" }
       ]

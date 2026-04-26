@@ -2,6 +2,20 @@
 
 The dashboard targets **executive readers**. Tone: Bloomberg / Capital IQ — dense, confident, dark, precise. Not a marketing site.
 
+## 2026-04-26 — Hero-card equal-height + scorecard caption + Executive Overview earnings-call section
+
+**Hero cards (overview).** The three company hero tiles on the comparative overview previously rendered at uneven heights when the one-liner descriptions ran to different line counts. Replaced the mixed-inline-style markup with a `.hero-card` flex column (`display:flex;flex-direction:column;height:100%`) and gave the description block `flex-grow:1` so the bottom stats row is always anchored to the panel bottom. CSS Grid still equalises the row heights; the flex column ensures the *internal* content lines up too. Focus state moved to `:focus-visible` with a 2px brand outline so keyboard navigation still has a clear ring without bloating the visual height for mouse users.
+
+New CSS classes in `css/main.css`: `.hero-card`, `.hero-card__head`, `.hero-card__mark`, `.hero-card__title`, `.hero-card__name`, `.hero-card__ticker`, `.hero-card__arrow`, `.hero-card__revenue`, `.hero-card__desc`, `.hero-card__stats`. Markup in `js/views.js` `heroCard()` simplified accordingly.
+
+**Inventory KPI caption.** Added a `caption` field to overview-scorecard row config; renders below the row label as `.sc-cell__caption` (10px tertiary text, normal case, line-height 1.4). First use is the Inventory row, where executives needed clarification that "Inventory" = real-estate inventory of unsold vacation-ownership interests (completed VOIs, WIP, land/infrastructure carried at cost). The mechanism is generic — any row can opt in via `caption: "..."` going forward.
+
+**Brand portfolio columns.** The Segment Drill-Down's Brand Portfolio table gained Tours / Contract Sales / VPG columns. Per the FY2025 10-K filings of all three peers, these operating metrics are *not disclosed at the brand level* — companies report at consolidated and segment granularity only. The columns therefore render "—" for every brand, with a footnote pointing executives to the Executive Overview (consolidated) and segment table (segment-level). Added so the structure is in place if a company starts disclosing brand-level KPIs in a future filing.
+
+**Executive Overview earnings-call section.** New panel below the recent-quarter KPIs on each company's Executive Overview tab: "Most recent earnings call — key items". Bulleted list of 4–6 items per company, paraphrased from the primary-source press release (MVW & HGV Q4/FY2025 releases dated Feb 25–26, 2026; TNL Q1 2026 release dated Apr 22, 2026). Each section cites the source URL inline. New CSS: `.call-list` (brand-coloured bullet markers via `::before`), `.call-source` (dashed-top source attribution).
+
+**Title.** "Vacation-Ownership Competitive Position — FY2025" → "Vacation Ownership Competitive Position". The hyphen + period suffix were noise; the FY tag is already shown twice in chrome (page-header tag and topbar meta).
+
 ## 2026-04-26 — Switch to light executive theme (supersedes the dark palette)
 
 The dashboard moves from the dark slate base to a clean light surface. Two reasons:
