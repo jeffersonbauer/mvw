@@ -28,12 +28,15 @@
   }
 
   function setActiveNav(slug) {
+    // NB: classList.toggle(name, force) treats an explicit `undefined` second
+    // argument as "no force given" → the class flips instead of being set.
+    // We must compute a strict boolean before calling toggle.
     document.querySelectorAll("#primary-nav .nav-pill").forEach(btn => {
-      const r = btn.getAttribute("data-route");
-      btn.classList.toggle("is-active",
-        (slug === undefined && r === "#/") ||
-        (slug && r && r.includes("/company/" + slug + "/"))
-      );
+      const r = btn.getAttribute("data-route") || "";
+      const isActive = slug === undefined
+        ? r === "#/"
+        : r.includes("/company/" + slug + "/");
+      btn.classList.toggle("is-active", isActive);
     });
   }
 

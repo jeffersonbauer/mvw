@@ -2,6 +2,52 @@
 
 The dashboard targets **executive readers**. Tone: Bloomberg / Capital IQ — dense, confident, dark, precise. Not a marketing site.
 
+## 2026-04-26 — Switch to light executive theme (supersedes the dark palette)
+
+The dashboard moves from the dark slate base to a clean light surface. Two reasons:
+
+1. **Brand colors pop.** On the dark theme, Hilton's `#002C51` navy was so dim it needed a `#1268B3` lift to render thin elements. On a white panel the literal navy is sharp and authentic — no lift needed. MVW's blue and TNL's green also gain saturation against light surfaces.
+2. **Less perceived "wash-out".** The original dark navy panel-on-darker-navy bg gave low surface-to-surface contrast and a flat feel. White panels with subtle borders + 1px shadow read as discrete cards.
+
+### New tokens
+
+```
+--bg-base:      #F4F6FA     /* warm-cool off-white page background */
+--bg-panel:     #FFFFFF      /* card / panel surface */
+--bg-elevated:  #EDF1F7      /* tinted for nested surfaces, callouts, scorecard headers */
+--bg-input:     #F8FAFC
+
+--text-primary:    #0F172A   /* deep navy text */
+--text-secondary:  #475569
+--text-tertiary:   #94A3B8
+
+--border-subtle:   rgba(15, 23, 42, 0.08)
+--border-strong:   rgba(15, 23, 42, 0.16)
+
+--accent-gold:     #B8860B   /* darker gold so it reads on white (was #D4AF37) */
+```
+
+### Brand colors (unchanged primary, lift token retired)
+
+- MVW `#0862A7`, HGV `#002C51`, TNL `#1D6B44` — same as before.
+- `--brand-primary-on-dark` now equals `--brand-primary` for all themes (kept as a token only so future dark-mode work doesn't need a search-and-replace).
+- `js/data.js` `brandAccent` collapses to `brandColor` for HGV (`#002C51`).
+- `js/charts.js` palette HGV is back to the literal navy.
+
+### Other affected styles
+
+- `.panel` gets a 1px shadow (`0 1px 3px rgba(15, 23, 42, 0.04)`).
+- Risk-cell heat colors switched from translucent dark to translucent green/gold/amber/red on white.
+- Leaflet tile layer switched from CartoDB **Dark Matter** to CartoDB **Positron** (light).
+- Chart.js defaults: `color = #475569`, gridlines `rgba(15, 23, 42, 0.06)`, tooltip background white with subtle border.
+- Scorecard leader-cell tint is a softer gold on white.
+
+### Bug fix bundled with this commit
+
+`setActiveNav()` in `js/app.js` was passing the result of a short-circuit boolean expression to `classList.toggle(className, force)`. When `slug` was `undefined` (overview route), the second argument evaluated to `undefined`, which modern browsers treat as the "no force given" case → the class is *toggled* rather than set. That caused the symptom where navigating HGV → Overview lit up MVW + TNL while turning HGV off.
+
+Fix: compute an explicit boolean before passing to `toggle()`.
+
 ## 2026-04-26 — Topbar simplification + risk-matrix redesign
 
 **Topbar.** Removed the MVW mark icon in the header — the dashboard is for the executive who already knows they opened it. Title text changed from "Competitive Intelligence" to **"Timeshare Competitive Intelligence"** so the subject is unambiguous. Subtitle updated to "Timeshare Industry · FY2025 Snapshot" to match. The browser tab `<title>` was also updated for consistency.

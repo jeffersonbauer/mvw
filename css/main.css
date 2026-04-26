@@ -6,49 +6,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
 
 :root {
-  /* surfaces */
-  --bg-base: #0B1220;
-  --bg-panel: #131C2E;
-  --bg-elevated: #1A2440;
-  --bg-input: #0F1729;
+  /* surfaces — light executive theme */
+  --bg-base: #F4F6FA;       /* warm-cool off-white */
+  --bg-panel: #FFFFFF;      /* card / panel */
+  --bg-elevated: #EDF1F7;   /* nested surfaces, callouts, scorecard headers */
+  --bg-input: #F8FAFC;
 
   /* text */
-  --text-primary: #E8EBF0;
-  --text-secondary: #9BA4B5;
-  --text-tertiary: #6B7689;
-  --text-inverse: #0B1220;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-tertiary: #94A3B8;
+  --text-inverse: #FFFFFF;
 
   /* borders */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.16);
 
   /* accent */
-  --accent-gold: #D4AF37;
-  --accent-gold-dim: #8A7223;
+  --accent-gold: #B8860B;          /* darker gold so it reads on white */
+  --accent-gold-dim: #8B6508;
 
   /* brand (overridden by .theme-{slug} on company views) */
   --brand-primary: var(--accent-gold);
   --brand-primary-on-dark: var(--brand-primary);
-  --brand-soft: rgba(212, 175, 55, 0.12);
+  --brand-soft: rgba(184, 134, 11, 0.10);
 
   --mvw-primary: #0862A7;          /* MVW — Pantone PMS 641 C */
-  --mvw-soft: rgba(8, 98, 167, 0.18);
-  --hgv-primary: #002C51;          /* Hilton brand navy — solid surfaces only */
-  --hgv-primary-on-dark: #1268B3;  /* Hilton-family lift — thin accents on dark bg */
-  --hgv-soft: rgba(0, 44, 81, 0.30);
+  --mvw-soft: rgba(8, 98, 167, 0.10);
+  --hgv-primary: #002C51;          /* Hilton brand navy — reads sharply on white */
+  --hgv-primary-on-dark: #002C51;  /* on light bg, lift is unnecessary; collapse to literal */
+  --hgv-soft: rgba(0, 44, 81, 0.10);
   --tnl-primary: #1D6B44;          /* Travel + Leisure deep forest */
-  --tnl-soft: rgba(29, 107, 68, 0.18);
+  --tnl-soft: rgba(29, 107, 68, 0.10);
 
-  /* Cascading accent tokens. --brand-primary is for solid blocks (hero marks).
-     --brand-primary-on-dark is for thin accents (lines, links, dots, chart series).
-     They're equal for MVW / TNL; only HGV needs the lift because Hilton's #002C51
-     navy has insufficient contrast against --bg-base for thin elements. */
+  /* --brand-primary-on-dark is kept as a token only so that re-theming back to
+     a dark variant in the future doesn't require a search-and-replace.
+     In this light theme it equals --brand-primary for every theme. */
 
   /* semantic */
-  --positive: #4ADE80;
-  --negative: #F87171;
-  --neutral: #9BA4B5;
-  --warn: #FBBF24;
+  --positive: #059669;
+  --negative: #DC2626;
+  --neutral: #64748B;
+  --warn: #D97706;
 
   /* spacing */
   --space-1: 4px;
@@ -99,10 +98,7 @@ html, body {
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(1200px 600px at 80% -10%, rgba(212, 175, 55, 0.04), transparent 60%),
-    radial-gradient(900px 500px at -10% 100%, rgba(178, 62, 62, 0.04), transparent 60%),
-    var(--bg-base);
+  background: var(--bg-base);
 }
 
 a { color: var(--brand-primary-on-dark); text-decoration: none; }
@@ -143,8 +139,8 @@ button {
   align-items: center;
   gap: var(--space-5);
   padding: var(--space-4) var(--space-6);
-  background: rgba(11, 18, 32, 0.92);
-  backdrop-filter: saturate(180%) blur(8px);
+  background: rgba(244, 246, 250, 0.88);
+  backdrop-filter: saturate(180%) blur(10px);
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -272,6 +268,7 @@ h3 {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: var(--space-5);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
 }
 
 .panel + .panel { margin-top: var(--space-5); }
@@ -306,9 +303,10 @@ h3 {
   padding: var(--space-4) var(--space-5);
   position: relative;
   overflow: hidden;
-  transition: border-color 180ms ease-out, transform 180ms ease-out;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  transition: border-color 180ms ease-out, box-shadow 180ms ease-out;
 }
-.kpi:hover { border-color: var(--border-strong); }
+.kpi:hover { border-color: var(--border-strong); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08); }
 
 .kpi__label {
   font-size: 11px;
@@ -434,7 +432,7 @@ h3 {
 
 .sc-cell--leader {
   position: relative;
-  background: rgba(212, 175, 55, 0.05);
+  background: rgba(184, 134, 11, 0.08);
 }
 .sc-cell--leader::before {
   content: "";
@@ -568,8 +566,9 @@ h3 {
   color: var(--text-primary);
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-strong);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12);
 }
-.leaflet-popup-tip { background: var(--bg-panel); }
+.leaflet-popup-tip { background: var(--bg-panel); border: 1px solid var(--border-strong); }
 .leaflet-popup-content { font-family: 'Inter', sans-serif; font-size: 12px; }
 .leaflet-popup-content strong { color: var(--brand-primary-on-dark); }
 
@@ -594,7 +593,7 @@ table.data th {
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
-table.data tbody tr:nth-child(even) { background: rgba(255, 255, 255, 0.015); }
+table.data tbody tr:nth-child(even) { background: rgba(15, 23, 42, 0.025); }
 table.data td.num, table.data th.num {
   text-align: right;
   font-family: 'JetBrains Mono', monospace;
@@ -677,7 +676,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
 }
 
 .risk-cell {
-  background: rgba(212, 175, 55, 0.04);
+  background: rgba(15, 23, 42, 0.02);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   position: relative;
@@ -688,12 +687,12 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   align-content: flex-start;
   transition: background 180ms;
 }
-.risk-cell:hover { background: rgba(212, 175, 55, 0.08); }
-.risk-cell[data-heat="1"] { background: rgba(74, 222, 128, 0.05); }
-.risk-cell[data-heat="2"] { background: rgba(212, 175, 55, 0.06); }
-.risk-cell[data-heat="3"] { background: rgba(251, 191, 36, 0.08); }
-.risk-cell[data-heat="4"] { background: rgba(248, 113, 113, 0.10); }
-.risk-cell[data-heat="5"] { background: rgba(248, 113, 113, 0.20); }
+.risk-cell:hover { background: rgba(15, 23, 42, 0.05); }
+.risk-cell[data-heat="1"] { background: rgba(5, 150, 105, 0.07); }
+.risk-cell[data-heat="2"] { background: rgba(184, 134, 11, 0.07); }
+.risk-cell[data-heat="3"] { background: rgba(217, 119, 6, 0.10); }
+.risk-cell[data-heat="4"] { background: rgba(220, 38, 38, 0.10); }
+.risk-cell[data-heat="5"] { background: rgba(220, 38, 38, 0.18); }
 
 .risk-dot {
   width: 20px;
@@ -804,7 +803,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
 .sources {
   margin-top: var(--space-6);
   padding: var(--space-4);
-  background: var(--bg-panel);
+  background: var(--bg-elevated);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-subtle);
   font-size: 11px;
@@ -827,9 +826,9 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   bottom: calc(100% + 4px);
   left: 50%;
   transform: translateX(-50%);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-strong);
-  color: var(--text-secondary);
+  background: var(--text-primary);
+  border: 1px solid var(--text-primary);
+  color: var(--bg-panel);
   font-size: 10px;
   padding: 4px 8px;
   border-radius: var(--radius-sm);
@@ -838,6 +837,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   pointer-events: none;
   transition: opacity 120ms ease-out;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.16);
 }
 [data-source]:hover::after { opacity: 1; }
 

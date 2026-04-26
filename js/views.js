@@ -198,7 +198,7 @@ window.MVW_VIEWS = (() => {
       <div class="scorecard">
         <div class="sc-cell sc-cell--label" style="background:var(--bg-elevated);font-weight:700;">Metric</div>
         ${headerCell("mvw", "Marriott Vacations", "NYSE: VAC", "#0862A7")}
-        ${headerCell("hgv", "Hilton Grand Vacations", "NYSE: HGV", "#1268B3")}
+        ${headerCell("hgv", "Hilton Grand Vacations", "NYSE: HGV", "#002C51")}
         ${headerCell("tnl", "Travel + Leisure Co.", "NYSE: TNL", "#1D6B44")}
         ${scorecardRows}
       </div>
@@ -587,7 +587,7 @@ window.MVW_VIEWS = (() => {
       worldCopyJump: true,
       scrollWheelZoom: false
     });
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: "abcd",
       maxZoom: 19

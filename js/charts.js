@@ -6,12 +6,15 @@
 window.MVW_CHARTS = (() => {
   const palette = {
     mvw: "#0862A7",          // MVW — Pantone PMS 641 C
-    hgv: "#1268B3",          // Hilton-family lift (literal navy #002C51 too dim for chart series)
+    hgv: "#002C51",          // Hilton brand navy — reads sharply on white
     tnl: "#1D6B44",          // Travel + Leisure deep forest
-    gold: "#D4AF37",
-    text: "#9BA4B5",
-    grid: "rgba(255,255,255,0.06)",
-    axis: "rgba(255,255,255,0.10)"
+    gold: "#B8860B",         // darker gold to contrast on white
+    text: "#475569",         // slate text for light theme axes/labels
+    grid: "rgba(15,23,42,0.06)",
+    axis: "rgba(15,23,42,0.10)",
+    tooltipBg: "#FFFFFF",
+    tooltipText: "#0F172A",
+    tooltipBody: "#475569"
   };
 
   const registry = new Map(); // canvasId -> Chart instance
@@ -24,6 +27,12 @@ window.MVW_CHARTS = (() => {
     Chart.defaults.borderColor = palette.grid;
     Chart.defaults.scale.grid.color = palette.grid;
     Chart.defaults.scale.ticks.color = palette.text;
+    // Light-theme tooltips
+    Chart.defaults.plugins.tooltip.backgroundColor = palette.tooltipBg;
+    Chart.defaults.plugins.tooltip.titleColor = palette.tooltipText;
+    Chart.defaults.plugins.tooltip.bodyColor = palette.tooltipBody;
+    Chart.defaults.plugins.tooltip.borderColor = palette.axis;
+    Chart.defaults.plugins.tooltip.borderWidth = 1;
   }
 
   function destroy(canvasId) {
@@ -64,7 +73,9 @@ window.MVW_CHARTS = (() => {
         plugins: {
           legend: { position: "top", labels: { boxWidth: 10, boxHeight: 10, usePointStyle: true, pointStyle: "rect" } },
           tooltip: {
-            backgroundColor: "#1A2440",
+            backgroundColor: palette.tooltipBg,
+            titleColor: palette.tooltipText,
+            bodyColor: palette.tooltipBody,
             borderColor: palette.axis, borderWidth: 1,
             callbacks: { label: (ctx) => ` ${ctx.dataset.label}: ${fmt(ctx.parsed.y)} ${unit || ""}` }
           }
@@ -108,7 +119,9 @@ window.MVW_CHARTS = (() => {
         plugins: {
           legend: { display: false },
           tooltip: {
-            backgroundColor: "#1A2440",
+            backgroundColor: palette.tooltipBg,
+            titleColor: palette.tooltipText,
+            bodyColor: palette.tooltipBody,
             borderColor: palette.axis, borderWidth: 1,
             callbacks: { label: (ctx) => ` ${fmt(ctx.parsed.y)} ${unit || ""}` }
           }
@@ -144,7 +157,9 @@ window.MVW_CHARTS = (() => {
         plugins: {
           legend: { position: "right", labels: { boxWidth: 10, boxHeight: 10, font: { size: 11 } } },
           tooltip: {
-            backgroundColor: "#1A2440",
+            backgroundColor: palette.tooltipBg,
+            titleColor: palette.tooltipText,
+            bodyColor: palette.tooltipBody,
             borderColor: palette.axis, borderWidth: 1,
             callbacks: { label: (ctx) => ` ${ctx.dataset.label}: $${ctx.parsed.x.toLocaleString()}M` }
           }
@@ -170,7 +185,7 @@ window.MVW_CHARTS = (() => {
         datasets: [{
           data: segments.map(s => s.revenue),
           backgroundColor: segments.map(s => s.color),
-          borderColor: "#131C2E",
+          borderColor: "#FFFFFF",
           borderWidth: 2
         }]
       },
@@ -181,7 +196,9 @@ window.MVW_CHARTS = (() => {
         plugins: {
           legend: { position: "bottom", labels: { boxWidth: 10, boxHeight: 10, font: { size: 11 }, padding: 12 } },
           tooltip: {
-            backgroundColor: "#1A2440",
+            backgroundColor: palette.tooltipBg,
+            titleColor: palette.tooltipText,
+            bodyColor: palette.tooltipBody,
             borderColor: palette.axis, borderWidth: 1,
             callbacks: { label: (ctx) => ` ${ctx.label}: $${ctx.parsed.toLocaleString()}M` }
           }
@@ -212,7 +229,9 @@ window.MVW_CHARTS = (() => {
         plugins: {
           legend: { position: "top", labels: { boxWidth: 10, boxHeight: 10, usePointStyle: true, pointStyle: "rect" } },
           tooltip: {
-            backgroundColor: "#1A2440",
+            backgroundColor: palette.tooltipBg,
+            titleColor: palette.tooltipText,
+            bodyColor: palette.tooltipBody,
             borderColor: palette.axis, borderWidth: 1,
             callbacks: { label: (ctx) => ` ${ctx.dataset.label}: $${ctx.parsed.x.toLocaleString()}M` }
           }
@@ -247,7 +266,9 @@ window.MVW_CHARTS = (() => {
         plugins: {
           legend: { position: "right", labels: { boxWidth: 10, boxHeight: 10, font: { size: 11 } } },
           tooltip: {
-            backgroundColor: "#1A2440",
+            backgroundColor: palette.tooltipBg,
+            titleColor: palette.tooltipText,
+            bodyColor: palette.tooltipBody,
             borderColor: palette.axis, borderWidth: 1,
             callbacks: { label: (ctx) => ` ${ctx.dataset.label}: $${ctx.parsed.x.toLocaleString()}M` }
           }

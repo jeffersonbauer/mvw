@@ -245,8 +245,8 @@ window.MVW_DATA = {
       shortName: "HGV",
       ticker: "HGV",
       exchange: "NYSE",
-      brandColor: "#002C51",      // Hilton brand navy — solid surfaces only
-      brandAccent: "#1268B3",     // Hilton-family lift — thin accents on dark bg
+      brandColor: "#002C51",      // Hilton brand navy — reads sharply on white
+      brandAccent: "#002C51",     // light theme has no contrast issue; lift retired
       brandSoft: "#001628",
       hq: "Orlando, Florida",
       foundedSpinOff: "Became an independent public company on January 3, 2017 (spun off from Hilton Worldwide Holdings)",
@@ -302,7 +302,7 @@ window.MVW_DATA = {
           adjEbitdaPrior: 802,
           margin: 23.7,
           share: 65,
-          color: "#1268B3",
+          color: "#002C51",
           source: "10-K FY2025, Segment Note",
           description: "Sales of vacation ownership intervals (net), sales/marketing/brand fees, and consumer financing. VOI sales (net) of $2,193M plus $356M of financing income."
         },
