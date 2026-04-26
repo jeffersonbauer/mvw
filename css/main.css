@@ -6,22 +6,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
 
 :root {
-  /* surfaces — light executive theme (cool stone, balanced contrast) */
-  --bg-base: #E8ECF1;       /* cool stone-blue — calm, not glum, reads as serious neutral */
-  --bg-base-rgb: 232, 236, 241;
-  --bg-panel: #FFFFFF;      /* card / panel — bright white pops against the stone bg */
-  --bg-elevated: #DBE1E9;   /* nested surfaces, callouts, scorecard headers */
-  --bg-input: #F1F4F8;
+  /* surfaces — clean executive light theme. Near-white base with strong card
+     definition keeps the page crisp instead of washed out. */
+  --bg-base: #F4F6FB;       /* near-white with the faintest cool tint — pages read as paper, not gray */
+  --bg-base-rgb: 244, 246, 251;
+  --bg-panel: #FFFFFF;      /* pure white panels — bright cards on light bg */
+  --bg-elevated: #EAEEF5;   /* nested surfaces (callouts, scorecard headers) */
+  --bg-input: #F7F9FC;
 
-  /* text — deep slate for primary, mid-slate for secondary, soft for tertiary */
-  --text-primary: #0B1426;     /* near-black with warm-navy undertone */
-  --text-secondary: #3E4D67;
-  --text-tertiary: #7E8AA0;
+  /* text — deep ink primary, confident secondary, soft tertiary */
+  --text-primary: #0A1228;     /* deep ink near-black, slight navy lean */
+  --text-secondary: #34405A;   /* confident slate, not muddy */
+  --text-tertiary: #6E7A91;    /* readable tertiary, not faint */
   --text-inverse: #FFFFFF;
 
-  /* borders */
-  --border-subtle: rgba(11, 20, 38, 0.10);
-  --border-strong: rgba(11, 20, 38, 0.20);
+  /* borders — more confident so cards read as discrete surfaces */
+  --border-subtle: rgba(10, 18, 40, 0.12);
+  --border-strong: rgba(10, 18, 40, 0.22);
 
   /* accent */
   --accent-gold: #B8860B;          /* darker gold so it reads on white */
@@ -153,16 +154,19 @@ button {
 }
 
 .topbar__title {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 15px;
-  letter-spacing: 0.2px;
+  letter-spacing: -0.1px;
+  color: var(--text-primary);
 }
 
 .topbar__subtitle {
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 600;
   color: var(--text-tertiary);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.2px;
+  margin-top: 2px;
 }
 
 .topbar__nav {
@@ -173,19 +177,29 @@ button {
 }
 
 .nav-pill {
-  padding: 6px 14px;
+  padding: 7px 16px;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  background: transparent;
+  background: var(--bg-panel);
   color: var(--text-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: 999px;
+  box-shadow: 0 1px 2px rgba(10, 18, 40, 0.04);
   transition: all 180ms ease-out;
 }
-.nav-pill:hover { color: var(--text-primary); border-color: var(--border-strong); }
-.nav-pill.is-active { background: var(--brand-soft); color: var(--text-primary); border-color: var(--brand-primary-on-dark); }
+.nav-pill:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  box-shadow: 0 2px 6px rgba(10, 18, 40, 0.08);
+}
+.nav-pill.is-active {
+  background: var(--brand-soft);
+  color: var(--brand-primary-on-dark);
+  border-color: var(--brand-primary-on-dark);
+  box-shadow: 0 1px 2px rgba(10, 18, 40, 0.06), inset 0 0 0 1px var(--brand-primary-on-dark);
+}
 
 .nav-pill .swatch {
   display: inline-block;
@@ -228,10 +242,11 @@ button {
 }
 
 .page-header h1 {
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 700;
   margin: 0 0 var(--space-2);
-  letter-spacing: -0.3px;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
 }
 
 .page-header p {
@@ -239,12 +254,13 @@ button {
   color: var(--text-secondary);
   font-size: 14px;
   max-width: 720px;
+  line-height: 1.6;
 }
 
 h2 {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--text-secondary);
   margin: 0 0 var(--space-4);
@@ -268,7 +284,9 @@ h3 {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: var(--space-5);
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
+  box-shadow:
+    0 1px 2px rgba(10, 18, 40, 0.04),
+    0 4px 12px rgba(10, 18, 40, 0.05);
 }
 
 .panel + .panel { margin-top: var(--space-5); }
@@ -376,10 +394,18 @@ h3 {
   padding: var(--space-4) var(--space-5);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02);
-  transition: border-color 180ms ease-out, box-shadow 180ms ease-out;
+  box-shadow:
+    0 1px 2px rgba(10, 18, 40, 0.04),
+    0 2px 6px rgba(10, 18, 40, 0.04);
+  transition: border-color 180ms ease-out, box-shadow 180ms ease-out, transform 180ms ease-out;
+  outline: none;
 }
-.kpi:hover { border-color: var(--border-strong); box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08); }
+.kpi:hover {
+  border-color: var(--border-strong);
+  box-shadow:
+    0 2px 4px rgba(10, 18, 40, 0.06),
+    0 8px 18px rgba(10, 18, 40, 0.08);
+}
 
 .kpi__label {
   font-size: 11px;
@@ -395,11 +421,11 @@ h3 {
 
 .kpi__value {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.5px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
   color: var(--text-primary);
-  line-height: 1.15;
+  line-height: 1.1;
 }
 .kpi__value.is-small { font-size: 20px; }
 .kpi__unit {
@@ -571,10 +597,11 @@ h3 {
 
 .company-hero__body { flex: 1; min-width: 0; }
 .company-hero__name {
-  font-size: 26px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
   margin: 0 0 var(--space-2);
+  color: var(--text-primary);
 }
 .company-hero__meta {
   font-size: 12px;
@@ -615,13 +642,14 @@ h3 {
   color: var(--text-tertiary);
   background: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
   white-space: nowrap;
   transition: color 180ms ease-out, border-color 180ms ease-out;
 }
 .tab:hover { color: var(--text-secondary); }
 .tab.is-active {
-  color: var(--text-primary);
+  color: var(--brand-primary-on-dark);
   border-bottom-color: var(--brand-primary-on-dark);
 }
 
