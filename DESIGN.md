@@ -2,6 +2,23 @@
 
 The dashboard targets **executive readers**. Tone: Bloomberg / Capital IQ — dense, confident, dark, precise. Not a marketing site.
 
+## 2026-04-26 — Brand-derived accent palette (supersedes initial brand tokens)
+
+Each company's accent now derives from that company's actual brand identity (not generic primary colors).
+
+| Company | Old | New | Provenance |
+|---|---|---|---|
+| MVW | `#B23E3E` (generic burgundy) | **`#A6192E`** | Pantone 187C — official Marriott corporate red |
+| HGV | `#1F6FB2` (mid-blue) | **`#1268B3`** | Hilton brand cobalt — primary digital Hilton blue. The deepest Hilton navy (PMS 287C `#003C7E`) is too dim against `--bg-base`; this is the brighter brand cobalt used in Hilton digital UI, which retains brand identity while reading on a dark surface |
+| TNL | `#2E7D52` (mid-green) | **`#2D6A4F`** | Travel + Leisure forest — closer to T+L Co. investor-deck palette; deeper, less mint, more "travel-outdoors" identity |
+
+Soft variants (panel-tint at ~18% opacity, computed inline as `rgba()` in `css/main.css`):
+- `--mvw-soft: rgba(166, 25, 46, 0.18);`
+- `--hgv-soft: rgba(18, 104, 179, 0.18);`
+- `--tnl-soft: rgba(45, 106, 79, 0.18);`
+
+These tokens are mirrored in: `css/main.css`, `js/data.js` (per-company `brandColor`), `js/charts.js` (palette), `js/views.js` (heroCard/headerCell args), `index.html` (nav swatches). Any future change must update all six locations.
+
 ## 2026-04-26 — Initial design
 
 ### Aesthetic principles

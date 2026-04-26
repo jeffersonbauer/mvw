@@ -5,9 +5,9 @@
 
 window.MVW_CHARTS = (() => {
   const palette = {
-    mvw: "#B23E3E",
-    hgv: "#1F6FB2",
-    tnl: "#2E7D52",
+    mvw: "#A6192E",          // Marriott Red — Pantone 187C
+    hgv: "#1268B3",          // Hilton brand cobalt
+    tnl: "#2D6A4F",          // Travel + Leisure forest
     gold: "#D4AF37",
     text: "#9BA4B5",
     grid: "rgba(255,255,255,0.06)",
