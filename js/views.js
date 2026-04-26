@@ -189,16 +189,16 @@ window.MVW_VIEWS = (() => {
       </div>
 
       <div class="grid grid--3" style="margin-bottom:32px;">
-        ${heroCard("MVW", "Marriott Vacations", "VAC", "#0862A7", mvw, "mvw")}
-        ${heroCard("HGV", "Hilton Grand Vacations", "HGV", "#002C51", hgv, "hgv")}
-        ${heroCard("TNL", "Travel + Leisure Co.", "TNL", "#1D6B44", tnl, "tnl")}
+        ${heroCard("MVW", "Marriott Vacations", "VAC", mvw, "mvw")}
+        ${heroCard("HGV", "Hilton Grand Vacations", "HGV", hgv, "hgv")}
+        ${heroCard("TNL", "Travel + Leisure Co.", "TNL", tnl, "tnl")}
       </div>
 
       <h2>Comparative Scorecard</h2>
       <div class="scorecard">
         <div class="sc-cell sc-cell--label" style="background:var(--bg-elevated);font-weight:700;">Metric</div>
         ${headerCell("mvw", "Marriott Vacations", "NYSE: VAC", "#0862A7")}
-        ${headerCell("hgv", "Hilton Grand Vacations", "NYSE: HGV", "#002C51")}
+        ${headerCell("hgv", "Hilton Grand Vacations", "NYSE: HGV", "#1268B3")}
         ${headerCell("tnl", "Travel + Leisure Co.", "NYSE: TNL", "#1D6B44")}
         ${scorecardRows}
       </div>
@@ -262,11 +262,13 @@ window.MVW_VIEWS = (() => {
       ${sourcesBlock([...mvw.sources, ...hgv.sources, ...tnl.sources])}
     `;
 
-    function heroCard(short, full, ticker, color, co, slug) {
+    function heroCard(short, full, ticker, co, slug) {
+      const mark = co.brandColor;
+      const accent = co.brandAccent || co.brandColor;
       return `
-        <div class="panel panel--accent" style="cursor:pointer;--brand-primary:${color};border-top-color:${color};" data-route="#/company/${slug}/exec">
+        <div class="panel panel--accent" style="cursor:pointer;--brand-primary:${mark};--brand-primary-on-dark:${accent};border-top-color:${accent};" data-route="#/company/${slug}/exec">
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
-            <div style="width:40px;height:40px;border-radius:6px;background:${color};color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;">${short}</div>
+            <div style="width:40px;height:40px;border-radius:6px;background:${mark};color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;">${short}</div>
             <div>
               <div style="font-weight:600;font-size:15px;">${full}</div>
               <div style="font-size:11px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:0.6px;">${ticker}</div>
@@ -591,7 +593,7 @@ window.MVW_VIEWS = (() => {
       maxZoom: 19
     }).addTo(map);
 
-    const color = co.brandColor;
+    const color = co.brandAccent || co.brandColor;
     co.geography.regions.forEach(r => {
       if (r.lat === 0 && r.lng === 0) return; // skip placeholder rows
       const radius = r.resorts ? Math.min(28, 8 + Math.sqrt(r.resorts) * 4) : (r.share ? Math.min(28, 8 + Math.sqrt(r.share) * 3) : 8);
@@ -679,28 +681,29 @@ window.MVW_VIEWS = (() => {
   }
 
   function afterFinancials(co) {
+    const accent = co.brandAccent || co.brandColor;
     const rev = co.financials.revenueTrend.filter(r => r.value !== null);
     const ebitda = co.financials.ebitdaTrend.filter(r => r.value !== null);
     MVW_CHARTS.trendLine("fin-revenue", {
       labels: rev.map(r => "FY" + r.year),
       data: rev.map(r => r.value),
-      color: co.brandColor,
+      color: accent,
       currency: true, unit: "M"
     });
     MVW_CHARTS.trendLine("fin-ebitda", {
       labels: ebitda.map(r => "FY" + r.year),
       data: ebitda.map(r => r.value),
-      color: co.brandColor,
+      color: accent,
       currency: true, unit: "M"
     });
     MVW_CHARTS.stackedDebt("fin-debt", {
       tranches: co.financials.debtStack,
-      color: co.brandColor
+      color: accent
     });
     MVW_CHARTS.capitalAllocation("fin-capreturn", {
       dividends: co.financials.capitalReturn.dividends || 0,
       buybacks: co.financials.capitalReturn.buybacks || 0,
-      color: co.brandColor
+      color: accent
     });
   }
 
@@ -760,7 +763,7 @@ window.MVW_VIEWS = (() => {
         gridHTML += `
           <div class="risk-cell" data-heat="${heat}">
             ${cellRisks.map(r => `
-              <div class="risk-dot" style="background:${co.brandColor}" title="${escapeHtml(r.title)}" data-risk="${r.idx - 1}">${r.idx}</div>
+              <div class="risk-dot" style="background:${co.brandAccent || co.brandColor}" title="${escapeHtml(r.title)}" data-risk="${r.idx - 1}">${r.idx}</div>
             `).join("")}
           </div>
         `;

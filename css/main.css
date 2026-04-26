@@ -28,14 +28,21 @@
 
   /* brand (overridden by .theme-{slug} on company views) */
   --brand-primary: var(--accent-gold);
+  --brand-primary-on-dark: var(--brand-primary);
   --brand-soft: rgba(212, 175, 55, 0.12);
 
   --mvw-primary: #0862A7;          /* MVW — Pantone PMS 641 C */
   --mvw-soft: rgba(8, 98, 167, 0.18);
-  --hgv-primary: #002C51;          /* Hilton brand navy */
+  --hgv-primary: #002C51;          /* Hilton brand navy — solid surfaces only */
+  --hgv-primary-on-dark: #1268B3;  /* Hilton-family lift — thin accents on dark bg */
   --hgv-soft: rgba(0, 44, 81, 0.30);
   --tnl-primary: #1D6B44;          /* Travel + Leisure deep forest */
   --tnl-soft: rgba(29, 107, 68, 0.18);
+
+  /* Cascading accent tokens. --brand-primary is for solid blocks (hero marks).
+     --brand-primary-on-dark is for thin accents (lines, links, dots, chart series).
+     They're equal for MVW / TNL; only HGV needs the lift because Hilton's #002C51
+     navy has insufficient contrast against --bg-base for thin elements. */
 
   /* semantic */
   --positive: #4ADE80;
@@ -60,9 +67,21 @@
   --shell-max: 1440px;
 }
 
-.theme-mvw { --brand-primary: var(--mvw-primary); --brand-soft: var(--mvw-soft); }
-.theme-hgv { --brand-primary: var(--hgv-primary); --brand-soft: var(--hgv-soft); }
-.theme-tnl { --brand-primary: var(--tnl-primary); --brand-soft: var(--tnl-soft); }
+.theme-mvw {
+  --brand-primary: var(--mvw-primary);
+  --brand-primary-on-dark: var(--mvw-primary);
+  --brand-soft: var(--mvw-soft);
+}
+.theme-hgv {
+  --brand-primary: var(--hgv-primary);
+  --brand-primary-on-dark: var(--hgv-primary-on-dark);
+  --brand-soft: var(--hgv-soft);
+}
+.theme-tnl {
+  --brand-primary: var(--tnl-primary);
+  --brand-primary-on-dark: var(--tnl-primary);
+  --brand-soft: var(--tnl-soft);
+}
 
 * { box-sizing: border-box; }
 
@@ -86,7 +105,7 @@ body {
     var(--bg-base);
 }
 
-a { color: var(--brand-primary); text-decoration: none; }
+a { color: var(--brand-primary-on-dark); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 button {
@@ -141,7 +160,7 @@ button {
   width: 32px;
   height: 32px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--mvw-primary), var(--accent-gold));
+  background: var(--mvw-primary);
   display: grid;
   place-items: center;
   color: #fff;
@@ -183,7 +202,7 @@ button {
   transition: all 180ms ease-out;
 }
 .nav-pill:hover { color: var(--text-primary); border-color: var(--border-strong); }
-.nav-pill.is-active { background: var(--brand-soft); color: var(--text-primary); border-color: var(--brand-primary); }
+.nav-pill.is-active { background: var(--brand-soft); color: var(--text-primary); border-color: var(--brand-primary-on-dark); }
 
 .nav-pill .swatch {
   display: inline-block;
@@ -271,7 +290,7 @@ h3 {
 .panel + .panel { margin-top: var(--space-5); }
 
 .panel--accent {
-  border-top: 2px solid var(--brand-primary);
+  border-top: 2px solid var(--brand-primary-on-dark);
 }
 
 .grid {
@@ -535,7 +554,7 @@ h3 {
 .tab:hover { color: var(--text-secondary); }
 .tab.is-active {
   color: var(--text-primary);
-  border-bottom-color: var(--brand-primary);
+  border-bottom-color: var(--brand-primary-on-dark);
 }
 
 /* ==========================================================================
@@ -565,7 +584,7 @@ h3 {
 }
 .leaflet-popup-tip { background: var(--bg-panel); }
 .leaflet-popup-content { font-family: 'Inter', sans-serif; font-size: 12px; }
-.leaflet-popup-content strong { color: var(--brand-primary); }
+.leaflet-popup-content strong { color: var(--brand-primary-on-dark); }
 
 /* ==========================================================================
    Tables
@@ -641,7 +660,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--brand-primary);
+  background: var(--brand-primary-on-dark);
   color: #fff;
   display: grid;
   place-items: center;
@@ -671,7 +690,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   height: 24px;
   border-radius: 50%;
   background: var(--brand-soft);
-  color: var(--brand-primary);
+  color: var(--brand-primary-on-dark);
   display: grid;
   place-items: center;
   font-size: 11px;
@@ -682,7 +701,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   font-size: 12px;
   color: var(--text-secondary);
   font-style: italic;
-  border-left: 2px solid var(--brand-primary);
+  border-left: 2px solid var(--brand-primary-on-dark);
   padding-left: var(--space-3);
   margin: var(--space-2) 0;
   line-height: 1.5;
@@ -728,7 +747,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   height: 28px;
   border-radius: 50%;
   background: var(--brand-soft);
-  color: var(--brand-primary);
+  color: var(--brand-primary-on-dark);
   display: grid;
   place-items: center;
   font-size: 12px;
@@ -755,7 +774,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
 .sources ul { list-style: none; padding: 0; margin: 0; }
 .sources li { margin: 2px 0; }
 .sources a { color: var(--text-secondary); }
-.sources a:hover { color: var(--brand-primary); }
+.sources a:hover { color: var(--brand-primary-on-dark); }
 
 /* ==========================================================================
    Tooltip / source on hover
@@ -813,8 +832,8 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   font-weight: 600;
   border-radius: 999px;
   background: var(--brand-soft);
-  color: var(--brand-primary);
-  border: 1px solid var(--brand-primary);
+  color: var(--brand-primary-on-dark);
+  border: 1px solid var(--brand-primary-on-dark);
 }
 .tag--neutral { background: var(--bg-elevated); color: var(--text-secondary); border-color: var(--border-subtle); }
 

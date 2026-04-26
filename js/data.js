@@ -41,7 +41,8 @@ window.MVW_DATA = {
       shortName: "MVW",
       ticker: "VAC",
       exchange: "NYSE",
-      brandColor: "#0862A7",
+      brandColor: "#0862A7",      // solid surfaces (hero mark, large blocks)
+      brandAccent: "#0862A7",     // thin accents (chart lines, dot markers, small swatches)
       brandSoft: "#04345C",
       hq: "Orlando, Florida",
       foundedSpinOff: "Spun off from Marriott International on November 21, 2011",
@@ -244,7 +245,8 @@ window.MVW_DATA = {
       shortName: "HGV",
       ticker: "HGV",
       exchange: "NYSE",
-      brandColor: "#002C51",
+      brandColor: "#002C51",      // Hilton brand navy — solid surfaces only
+      brandAccent: "#1268B3",     // Hilton-family lift — thin accents on dark bg
       brandSoft: "#001628",
       hq: "Orlando, Florida",
       foundedSpinOff: "Became an independent public company on January 3, 2017 (spun off from Hilton Worldwide Holdings)",
@@ -300,7 +302,7 @@ window.MVW_DATA = {
           adjEbitdaPrior: 802,
           margin: 23.7,
           share: 65,
-          color: "#002C51",
+          color: "#1268B3",
           source: "10-K FY2025, Segment Note",
           description: "Sales of vacation ownership intervals (net), sales/marketing/brand fees, and consumer financing. VOI sales (net) of $2,193M plus $356M of financing income."
         },
@@ -421,7 +423,8 @@ window.MVW_DATA = {
       shortName: "TNL",
       ticker: "TNL",
       exchange: "NYSE",
-      brandColor: "#1D6B44",
+      brandColor: "#1D6B44",      // solid surfaces
+      brandAccent: "#1D6B44",     // thin accents
       brandSoft: "#0E3D26",
       hq: "Orlando, Florida",
       foundedSpinOff: "Wyndham Worldwide spun off from Cendant on July 31, 2006; renamed Wyndham Destinations on May 31, 2018; renamed Travel + Leisure Co. on February 17, 2021",

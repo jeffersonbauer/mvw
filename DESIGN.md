@@ -2,6 +2,18 @@
 
 The dashboard targets **executive readers**. Tone: Bloomberg / Capital IQ — dense, confident, dark, precise. Not a marketing site.
 
+## 2026-04-26 — `--brand-primary-on-dark` lift token + topbar mark fix
+
+**Two changes, both addressing things the literal HGV navy + the gradient app icon were doing badly:**
+
+1. **`--brand-primary-on-dark` cascading token.** The literal `#002C51` Hilton navy stays in place for solid surfaces (the company-hero mark — a white-text-on-navy block that reads fine), but a new `--hgv-primary-on-dark: #1268B3` lift is now used wherever the brand color appears as a *thin* accent on the `--bg-base` slate (active-tab underline, panel border-tops, links, dot markers, chart series, leaflet map markers, tag chips). MVW and TNL set `--brand-primary-on-dark` to the same value as `--brand-primary` — only HGV needs the lift.
+
+   Mirrored in `js/data.js` as a per-company `brandAccent` field (HGV = `#1268B3`, others = same as `brandColor`). Used by `heroCard()`, `headerCell()` swatches, the Leaflet marker color, the risk dot color, and all four trend-chart series via `afterFinancials()`. The chart palette in `js/charts.js` also points HGV at the lift.
+
+   The `theme-{slug}` blocks now set both `--brand-primary` and `--brand-primary-on-dark` together. Inline overrides in `heroCard()` set both as well so the cascade still works inside per-card themes on the overview.
+
+2. **Topbar mark is now solid MVW blue.** The previous gradient (`linear-gradient(135deg, var(--mvw-primary), var(--accent-gold))`) felt decorative; the user wanted the chrome icon to match the company hero marks (flat color block, white wordmark on top). Single-line change in `.topbar__mark`.
+
 ## 2026-04-26 — Corrected brand palette (supersedes the prior 2026-04-26 entry)
 
 User correction: MVW is **blue**, not red. The earlier red palette assumed Marriott corporate; MVW publishes its own brand identity built around Pantone 641 C blue.

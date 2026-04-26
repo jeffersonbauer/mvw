@@ -6,7 +6,7 @@
 window.MVW_CHARTS = (() => {
   const palette = {
     mvw: "#0862A7",          // MVW — Pantone PMS 641 C
-    hgv: "#002C51",          // Hilton brand navy
+    hgv: "#1268B3",          // Hilton-family lift (literal navy #002C51 too dim for chart series)
     tnl: "#1D6B44",          // Travel + Leisure deep forest
     gold: "#D4AF37",
     text: "#9BA4B5",
