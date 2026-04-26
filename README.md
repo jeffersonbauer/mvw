@@ -6,7 +6,9 @@ All numbers are sourced from the latest **FY2025 10-K filings** on SEC EDGAR (fi
 
 ## Quick start
 
-No build step. Open the dashboard with any local static server:
+**Live site (GitHub Pages):** https://jeffersonbauer.github.io/mvw/
+
+**Local:** No build step. Serve the directory with any static server:
 
 ```bash
 cd /path/to/mvw

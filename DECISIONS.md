@@ -40,6 +40,12 @@ Append-only log. Each entry is dated and explains the *why* so future-you can ju
 ### Six fixed tabs per company
 Per the project brief: Executive Overview, Segment Drill-Down, Global Footprint, Financial Deep Dive, Growth Catalysts, Risk Matrix. Adding or renaming tabs requires a new dated entry here.
 
+### Hosting: GitHub Pages from `main` / root
+- Site served from the root of the `main` branch via GitHub Pages → https://jeffersonbauer.github.io/mvw/
+- `.nojekyll` added at repo root so Pages skips the Jekyll build step (we serve plain static files; not a Jekyll site).
+- All asset paths in `index.html` are relative (`css/main.css`, `js/data.js`, etc.) so the same files work at the root or under a subpath.
+- **Why:** zero-cost, same-origin deploy that matches our static-only architecture; no separate hosting account or pipeline needed.
+
 ### Risk Matrix: severity × likelihood are analyst-coded, not company-disclosed
 - Risk *titles* and *descriptions* come verbatim from each 10-K Item 1A. The 2-axis grid placement (severity × likelihood) is an analyst overlay, not a company disclosure.
 - **Why:** 10-Ks list risks as flat enumerations without scores; a heat map adds executive value but the scoring is interpretation. The dashboard labels this clearly in the UI ("analyst-coded — not company-disclosed").
