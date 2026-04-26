@@ -243,6 +243,14 @@ window.MVW_DATA = {
           "Subsequent events: repaid $575M of convertible debt in January 2026; sold Westin Resort & Spa Cancun for $50M; agreed to acquire 64 timeshare units in Puerto Vallarta for $46M (delivery late 2028)."
         ]
       },
+      upcomingCall: {
+        period: "Q1 2026",
+        scheduledDate: "2026-05-05",
+        scheduledTime: "8:30am ET",
+        announcementUrl: "https://ir.marriottvacationsworldwide.com/news-releases/news-release-details/marriott-vacations-worldwide-corporation-announces-first-16",
+        webcastUrl: "https://ir.mvwc.com",
+        announcementLabel: "MVW Q1 2026 earnings release / call announcement"
+      },
       sources: [
         { label: "FY2025 10-K (filed Feb 2026)", url: "https://www.sec.gov/Archives/edgar/data/1524358/000152435826000010/vac-20251231.htm" },
         { label: "Q3 2025 10-Q (filed Nov 2025)", url: "https://www.sec.gov/Archives/edgar/data/1524358/000152435825000166/0001524358-25-000166-index.htm" },
@@ -435,6 +443,14 @@ window.MVW_DATA = {
           "Q4 GAAP net income attributable to stockholders $48M ($0.55 diluted EPS); adjusted net income $76M; adjusted diluted EPS $0.88.",
           "Detailed VPG, NOG, and member-count call commentary not retrievable via primary-source fetch in this refresh — see the 8-K Exhibit 99.1 (Feb 26, 2026) on EDGAR for the full release."
         ]
+      },
+      upcomingCall: {
+        period: "Q1 2026",
+        scheduledDate: "2026-04-30",
+        scheduledTime: null,
+        announcementUrl: "https://investors.hgv.com",
+        webcastUrl: "https://investors.hgv.com",
+        announcementLabel: "HGV Q1 2026 earnings call (per company schedule)"
       },
       sources: [
         { label: "FY2025 10-K (filed Feb 26, 2026)", url: "https://www.sec.gov/Archives/edgar/data/1674168/000167416826000017/hgv-20251231.htm" },

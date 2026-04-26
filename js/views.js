@@ -440,6 +440,16 @@ window.MVW_VIEWS = (() => {
       ${co.recentCall ? `
         <div class="panel" style="margin-top:24px;">
           <h2>Most recent earnings call — key items</h2>
+          ${co.upcomingCall ? `
+            <div class="upcoming-call">
+              <span class="upcoming-call__pill">Next earnings call</span>
+              <span class="upcoming-call__body">
+                <strong>${escapeHtml(co.upcomingCall.period)}</strong>
+                · scheduled <strong>${escapeHtml(co.upcomingCall.scheduledDate)}</strong>${co.upcomingCall.scheduledTime ? ` · ${escapeHtml(co.upcomingCall.scheduledTime)}` : ""}
+                · <a href="${escapeHtml(co.upcomingCall.announcementUrl)}" target="_blank" rel="noopener">${escapeHtml(co.upcomingCall.announcementLabel)}</a>
+              </span>
+            </div>
+          ` : ""}
           <div class="callout" style="margin-bottom:16px;">
             <strong>${escapeHtml(co.recentCall.period)} call</strong> · released ${escapeHtml(co.recentCall.date)} · paraphrased from primary-source press release.
           </div>

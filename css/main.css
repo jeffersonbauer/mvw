@@ -852,6 +852,33 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   color: var(--text-secondary);
 }
 
+/* Upcoming earnings call notice (Executive Overview) */
+.upcoming-call {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  background: var(--brand-soft);
+  border: 1px solid var(--brand-primary-on-dark);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  color: var(--text-primary);
+}
+.upcoming-call__pill {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--brand-primary-on-dark);
+  color: #fff;
+  white-space: nowrap;
+}
+.upcoming-call__body { line-height: 1.5; }
+.upcoming-call__body a { color: var(--brand-primary-on-dark); }
+
 /* Earnings-call key items list (Executive Overview) */
 .call-list {
   list-style: none;
