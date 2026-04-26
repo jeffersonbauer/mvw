@@ -2,6 +2,32 @@
 
 The dashboard targets **executive readers**. Tone: Bloomberg / Capital IQ — dense, confident, dark, precise. Not a marketing site.
 
+## 2026-04-26 — Topbar simplification + risk-matrix redesign
+
+**Topbar.** Removed the MVW mark icon in the header — the dashboard is for the executive who already knows they opened it. Title text changed from "Competitive Intelligence" to **"Timeshare Competitive Intelligence"** so the subject is unambiguous. Subtitle updated to "Timeshare Industry · FY2025 Snapshot" to match. The browser tab `<title>` was also updated for consistency.
+
+**Risk matrix.** Three problems were fixed in one redesign:
+
+1. *The matrix took the full panel width and felt sparse.* The 5×5 grid now sits in a 2-column layout next to the verbatim risk-factor list. The grid is constrained to ~520px wide (cells 80px × 56px); the list takes the other column. On screens narrower than ~1100px the layout collapses to a single column via the existing `.grid--2` responsive break.
+
+2. *The Y-axis title "Severity" was implemented in code but never actually rendered.* The variable holding the rotated label was built but the wrong identifier was concatenated into the output. The new layout has a real rotated `.risk-y-title` cell occupying col 1 spanning rows 2–6, and a horizontal `.risk-x-title` placed below the grid.
+
+3. *Bare 1–5 axis numbers told the reader nothing.* Each axis tick now pairs the analyst score with a descriptive word — standard ISO 31000 / risk-matrix vocabulary:
+
+   | Score | Severity (Y) | Likelihood (X) |
+   |---|---|---|
+   | 5 | Severe | Almost Certain |
+   | 4 | Major | Likely |
+   | 3 | Moderate | Possible |
+   | 2 | Low | Unlikely |
+   | 1 | Minor | Rare |
+
+   The numeric column is mono / brand-coloured; the descriptive word is small caps / tertiary text. Together they read clearly without needing a separate legend row.
+
+   Same vocabulary appears in the verbatim list's per-row meta line (e.g., "Severity: 5/5 — Severe").
+
+CSS classes added to `css/main.css`: `.risk-matrix-wrap`, `.risk-matrix`, `.risk-y-title`, `.risk-x-title`, `.risk-x-label`, `.risk-y-label`, `.risk-axis-num`, `.risk-axis-word`. Old `.risk-grid`, `.risk-axis-label`, `.risk-axis-row` rules removed.
+
 ## 2026-04-26 — `--brand-primary-on-dark` lift token + topbar mark fix
 
 **Two changes, both addressing things the literal HGV navy + the gradient app icon were doing badly:**

@@ -738,7 +738,12 @@ window.MVW_VIEWS = (() => {
 
   // ---------------------------------------------------------------- Tab: Risk Matrix
   function renderRisks(co) {
-    // Build 5x5 grid; cells indexed by likelihood (cols) × severity (rows, top=5)
+    // Standard ISO-style risk-matrix vocabulary. Pairs each analyst-coded score
+    // with a descriptive word so the axes read clearly without a separate legend.
+    const SEV_WORDS = { 1: "Minor", 2: "Low", 3: "Moderate", 4: "Major", 5: "Severe" };
+    const LIK_WORDS = { 1: "Rare", 2: "Unlikely", 3: "Possible", 4: "Likely", 5: "Almost Certain" };
+
+    // Build cell index keyed by "likelihood_severity"
     const cells = {};
     co.risks.forEach((r, i) => {
       const key = `${r.likelihood}_${r.severity}`;
@@ -747,32 +752,53 @@ window.MVW_VIEWS = (() => {
     });
 
     const heatScore = (likelihood, severity) => Math.min(5, Math.round((likelihood + severity) / 2));
+    const dotColor = co.brandAccent || co.brandColor;
 
-    let gridCells = `<div class="risk-axis-label risk-axis-label--y" style="grid-row: 2 / 7;">Severity</div>`;
-    // Top header row: empty corner + likelihood 1..5 labels
-    gridCells += `<div></div>`; // top-left blank above column header? actually we already span y axis
-    // simpler: just skip the corner
+    // Grid layout (cols left → right):
+    //   col 1: Y-axis title (rotated, spans rows 2-6)
+    //   col 2: severity label (number + word)
+    //   cols 3-7: heat cells, likelihood 1 → 5
+    // Rows top → bottom:
+    //   row 1: corner (col 1 blank for the title), corner (col 2 blank), likelihood headers (cols 3-7)
+    //   rows 2-6: severity 5 (top) → severity 1 (bottom)
 
-    // Build grid as: rows correspond to severity 5 (top) → 1 (bottom); cols correspond to likelihood 1 → 5
-    let gridHTML = "";
+    let matrixHTML = "";
+
+    // Row 1, col 1-2: empty (the y-title is placed below with grid-row 2/7 to span the data rows)
+    matrixHTML += `<div></div><div></div>`;
+
+    // Row 1, cols 3-7: likelihood headers
+    for (let lik = 1; lik <= 5; lik++) {
+      matrixHTML += `
+        <div class="risk-x-label">
+          <span class="risk-axis-num">${lik}</span>
+          <span class="risk-axis-word">${LIK_WORDS[lik]}</span>
+        </div>
+      `;
+    }
+
+    // Y-axis title placed in col 1, spanning rows 2-6
+    matrixHTML += `<div class="risk-y-title" style="grid-column:1; grid-row:2 / 7;">Severity →</div>`;
+
+    // Rows 2-6: severity label + 5 cells per row
     for (let sev = 5; sev >= 1; sev--) {
-      gridHTML += `<div class="risk-axis-label">${sev}</div>`;
+      matrixHTML += `
+        <div class="risk-y-label">
+          <span class="risk-axis-num">${sev}</span>
+          <span class="risk-axis-word">${SEV_WORDS[sev]}</span>
+        </div>
+      `;
       for (let lik = 1; lik <= 5; lik++) {
         const cellRisks = cells[`${lik}_${sev}`] || [];
         const heat = heatScore(lik, sev);
-        gridHTML += `
+        matrixHTML += `
           <div class="risk-cell" data-heat="${heat}">
             ${cellRisks.map(r => `
-              <div class="risk-dot" style="background:${co.brandAccent || co.brandColor}" title="${escapeHtml(r.title)}" data-risk="${r.idx - 1}">${r.idx}</div>
+              <div class="risk-dot" style="background:${dotColor}" title="${escapeHtml(r.title)} — Sev ${r.severity}/5, Lik ${r.likelihood}/5" data-risk="${r.idx - 1}">${r.idx}</div>
             `).join("")}
           </div>
         `;
       }
-    }
-    // Bottom: empty corner + 1..5 likelihood labels
-    gridHTML += `<div></div>`;
-    for (let lik = 1; lik <= 5; lik++) {
-      gridHTML += `<div class="risk-axis-label">${lik}</div>`;
     }
 
     return `
@@ -781,41 +807,38 @@ window.MVW_VIEWS = (() => {
 
       <div class="callout">
         Risk titles and verbatim language come from <strong>${escapeHtml(co.fiscal.filingType)} ${escapeHtml(co.fiscal.period)} Item 1A</strong>.
-        Severity and likelihood scores are <strong>analyst-coded overlays</strong> (1–5 scale, where 5 = high) — they are not company disclosures.
-        Hover any dot to read the verbatim risk language; the numbered list below mirrors the dot indices.
+        Severity and likelihood scores are <strong>analyst-coded overlays</strong> — they are not company disclosures.
+        Hover or click any dot to jump to the verbatim risk language on the right.
       </div>
 
-      <div class="panel">
-        <h2>Risk heat map</h2>
-        <div class="risk-grid">
-          ${gridHTML}
-        </div>
-        <div class="risk-axis-row" style="margin-left:60px;">
-          <span>Likelihood ↓</span>
-          <span>1 — Low</span>
-          <span></span>
-          <span>3 — Moderate</span>
-          <span></span>
-          <span>5 — High</span>
+      <div class="grid grid--2" style="align-items:start;">
+        <div class="panel">
+          <h2>Risk heat map</h2>
+          <div class="risk-matrix-wrap">
+            <div class="risk-matrix">${matrixHTML}</div>
+            <div class="risk-x-title">Likelihood →</div>
+          </div>
         </div>
 
-        <div class="risk-detail">
-          <h3>All disclosed risk factors (verbatim)</h3>
-          ${co.risks.map((r, i) => `
-            <div class="risk-list-item" id="risk-${i}">
-              <div class="risk-list-item__num">${i + 1}</div>
-              <div>
-                <div class="risk-list-item__title">${escapeHtml(r.title)}</div>
-                <div class="risk-list-item__verbatim">"${escapeHtml(r.verbatim)}"</div>
-                <div class="risk-list-item__meta">
-                  <span><strong>Severity (analyst):</strong> ${r.severity}/5</span>
-                  <span><strong>Likelihood (analyst):</strong> ${r.likelihood}/5</span>
-                  <span><strong>Source:</strong> ${escapeHtml(r.source)}</span>
+        <div class="panel">
+          <h2>All disclosed risk factors (verbatim)</h2>
+          <div class="risk-list">
+            ${co.risks.map((r, i) => `
+              <div class="risk-list-item" id="risk-${i}">
+                <div class="risk-list-item__num">${i + 1}</div>
+                <div>
+                  <div class="risk-list-item__title">${escapeHtml(r.title)}</div>
+                  <div class="risk-list-item__verbatim">"${escapeHtml(r.verbatim)}"</div>
+                  <div class="risk-list-item__meta">
+                    <span><strong>Severity:</strong> ${r.severity}/5 — ${SEV_WORDS[r.severity]}</span>
+                    <span><strong>Likelihood:</strong> ${r.likelihood}/5 — ${LIK_WORDS[r.likelihood]}</span>
+                    <span><strong>Source:</strong> ${escapeHtml(r.source)}</span>
+                  </div>
+                  ${r.note ? `<div class="muted" style="font-size:11px;margin-top:6px;">Note: ${escapeHtml(r.note)}</div>` : ""}
                 </div>
-                ${r.note ? `<div class="muted" style="font-size:11px;margin-top:6px;">Note: ${escapeHtml(r.note)}</div>` : ""}
               </div>
-            </div>
-          `).join("")}
+            `).join("")}
+          </div>
         </div>
       </div>
 

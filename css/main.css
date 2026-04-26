@@ -156,19 +156,6 @@ button {
   user-select: none;
 }
 
-.topbar__mark {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background: var(--mvw-primary);
-  display: grid;
-  place-items: center;
-  color: #fff;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.5px;
-}
-
 .topbar__title {
   font-weight: 600;
   font-size: 15px;
@@ -619,33 +606,85 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
    Risk matrix
    ========================================================================== */
 
-.risk-grid {
-  display: grid;
-  grid-template-columns: 60px repeat(5, 1fr);
-  grid-template-rows: 30px repeat(5, 80px);
-  gap: 4px;
-  margin-top: var(--space-4);
+/* Compact 5x5 risk matrix. Y axis = severity (5 high → 1 low, top to bottom).
+   X axis = likelihood (1 rare → 5 almost certain, left to right).
+   Constrained max-width so the matrix sits comfortably in a 2-column layout
+   alongside the verbatim risk-factor list. */
+
+.risk-matrix-wrap {
+  max-width: 540px;
+  margin: var(--space-3) 0 0;
 }
 
-.risk-axis-label {
+.risk-matrix {
+  display: grid;
+  grid-template-columns: 22px 86px repeat(5, 1fr);
+  grid-template-rows: 44px repeat(5, 56px);
+  gap: 3px;
+}
+
+.risk-y-title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
   display: grid;
   place-items: center;
   font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
 }
-.risk-axis-label--y { writing-mode: vertical-rl; transform: rotate(180deg); }
+
+.risk-x-title {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-top: var(--space-3);
+  padding-left: 108px; /* aligns with cell area, offsetting the 2 axis-label cols */
+}
+
+.risk-x-label,
+.risk-y-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+}
+.risk-y-label {
+  align-items: flex-end;
+  padding-right: 8px;
+  text-align: right;
+}
+.risk-axis-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.risk-axis-word {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  line-height: 1.1;
+}
 
 .risk-cell {
   background: rgba(212, 175, 55, 0.04);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   position: relative;
-  padding: 6px;
+  padding: 4px;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 3px;
   align-content: flex-start;
   transition: background 180ms;
 }
@@ -657,34 +696,35 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
 .risk-cell[data-heat="5"] { background: rgba(248, 113, 113, 0.20); }
 
 .risk-dot {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--brand-primary-on-dark);
   color: #fff;
   display: grid;
   place-items: center;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.18);
   transition: transform 120ms;
 }
-.risk-dot:hover { transform: scale(1.15); }
+.risk-dot:hover { transform: scale(1.18); }
 
-.risk-detail {
-  margin-top: var(--space-5);
-  border-top: 1px solid var(--border-subtle);
-  padding-top: var(--space-5);
-}
-.risk-detail h3 { color: var(--text-secondary); }
+/* Risk-factor list sits in the right column; its panel scrolls if it exceeds
+   the matrix-panel height to keep the heat map visible without scrolling. */
+.risk-list { padding-right: var(--space-2); }
+
 .risk-list-item {
   display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: var(--space-4);
+  grid-template-columns: 30px 1fr;
+  gap: var(--space-3);
   padding: var(--space-3) 0;
   border-bottom: 1px solid var(--border-subtle);
 }
+.risk-list-item:first-child { padding-top: 0; }
+.risk-list-item:last-child { border-bottom: none; }
+
 .risk-list-item__num {
   width: 24px;
   height: 24px;
@@ -695,6 +735,7 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   place-items: center;
   font-size: 11px;
   font-weight: 700;
+  border: 1px solid var(--brand-primary-on-dark);
 }
 .risk-list-item__title { font-weight: 600; margin-bottom: 4px; font-size: 13px; }
 .risk-list-item__verbatim {
@@ -706,18 +747,17 @@ table.data td.muted { color: var(--text-tertiary); font-size: 11px; }
   margin: var(--space-2) 0;
   line-height: 1.5;
 }
-.risk-list-item__meta { font-size: 11px; color: var(--text-tertiary); display: flex; gap: var(--space-4); }
+.risk-list-item__meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
 .risk-list-item__meta strong { color: var(--text-secondary); font-weight: 600; }
 
-.risk-axis-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: var(--text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-top: var(--space-3);
-  padding: 0 var(--space-3);
+@media (max-width: 1100px) {
+  .risk-matrix-wrap { margin-left: auto; margin-right: auto; }
 }
 
 .callout {
