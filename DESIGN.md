@@ -2,22 +2,24 @@
 
 The dashboard targets **executive readers**. Tone: Bloomberg / Capital IQ — dense, confident, dark, precise. Not a marketing site.
 
-## 2026-04-26 — Brand-derived accent palette (supersedes initial brand tokens)
+## 2026-04-26 — Corrected brand palette (supersedes the prior 2026-04-26 entry)
 
-Each company's accent now derives from that company's actual brand identity (not generic primary colors).
+User correction: MVW is **blue**, not red. The earlier red palette assumed Marriott corporate; MVW publishes its own brand identity built around Pantone 641 C blue.
 
-| Company | Old | New | Provenance |
-|---|---|---|---|
-| MVW | `#B23E3E` (generic burgundy) | **`#A6192E`** | Pantone 187C — official Marriott corporate red |
-| HGV | `#1F6FB2` (mid-blue) | **`#1268B3`** | Hilton brand cobalt — primary digital Hilton blue. The deepest Hilton navy (PMS 287C `#003C7E`) is too dim against `--bg-base`; this is the brighter brand cobalt used in Hilton digital UI, which retains brand identity while reading on a dark surface |
-| TNL | `#2E7D52` (mid-green) | **`#2D6A4F`** | Travel + Leisure forest — closer to T+L Co. investor-deck palette; deeper, less mint, more "travel-outdoors" identity |
+| Company | New | Provenance (user-supplied) |
+|---|---|---|
+| MVW | **`#0862A7`** | Pantone PMS 641 C — Marriott Vacations Worldwide rich blue (paired with PMS Black 6 C `#000000`) |
+| HGV | **`#002C51`** | Hilton corporate brand navy — used across HGV investor pages, digital properties, and logo backgrounds. Hilton's metallic accent palette (Teak `#B09A61`, Tide `#B6B1AD`) is reserved for premium/print, not used in this UI |
+| TNL | **`#1D6B44`** | Travel + Leisure deep forest — center of the documented `#1B5E3B`–`#1D6B44` range observed in TNL's wordmark and corporate surfaces. (TNL's identity is younger — rebranded from Wyndham Destinations in Feb 2021 — and not yet catalogued in major brand-color registries.) |
 
-Soft variants (panel-tint at ~18% opacity, computed inline as `rgba()` in `css/main.css`):
-- `--mvw-soft: rgba(166, 25, 46, 0.18);`
-- `--hgv-soft: rgba(18, 104, 179, 0.18);`
-- `--tnl-soft: rgba(45, 106, 79, 0.18);`
+Soft variants (panel tints, in `css/main.css`):
+- `--mvw-soft: rgba(8, 98, 167, 0.18);`
+- `--hgv-soft: rgba(0, 44, 81, 0.30);` — slightly higher opacity than peers because the base navy is dark; needs the lift to register as a tint
+- `--tnl-soft: rgba(29, 107, 68, 0.18);`
 
-These tokens are mirrored in: `css/main.css`, `js/data.js` (per-company `brandColor`), `js/charts.js` (palette), `js/views.js` (heroCard/headerCell args), `index.html` (nav swatches). Any future change must update all six locations.
+**Contrast note:** the Hilton navy `#002C51` against `--bg-base` `#0B1220` has a roughly 1.4:1 contrast ratio — borderline for use as a thin underline or 1–2 px chart line. We accept this trade-off in favor of brand fidelity. If a specific element becomes unreadable, raise it here and we'll define a `--hgv-primary-on-dark` lift token rather than overload `--hgv-primary`.
+
+These tokens are mirrored in: `css/main.css`, `js/data.js` (per-company `brandColor` + segment `color`), `js/charts.js` (palette), `js/views.js` (heroCard / headerCell args), `index.html` (nav swatches). Any future change must update all six locations.
 
 ## 2026-04-26 — Initial design
 

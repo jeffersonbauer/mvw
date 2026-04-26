@@ -189,17 +189,17 @@ window.MVW_VIEWS = (() => {
       </div>
 
       <div class="grid grid--3" style="margin-bottom:32px;">
-        ${heroCard("MVW", "Marriott Vacations", "VAC", "#A6192E", mvw, "mvw")}
-        ${heroCard("HGV", "Hilton Grand Vacations", "HGV", "#1268B3", hgv, "hgv")}
-        ${heroCard("TNL", "Travel + Leisure Co.", "TNL", "#2D6A4F", tnl, "tnl")}
+        ${heroCard("MVW", "Marriott Vacations", "VAC", "#0862A7", mvw, "mvw")}
+        ${heroCard("HGV", "Hilton Grand Vacations", "HGV", "#002C51", hgv, "hgv")}
+        ${heroCard("TNL", "Travel + Leisure Co.", "TNL", "#1D6B44", tnl, "tnl")}
       </div>
 
       <h2>Comparative Scorecard</h2>
       <div class="scorecard">
         <div class="sc-cell sc-cell--label" style="background:var(--bg-elevated);font-weight:700;">Metric</div>
-        ${headerCell("mvw", "Marriott Vacations", "NYSE: VAC", "#A6192E")}
-        ${headerCell("hgv", "Hilton Grand Vacations", "NYSE: HGV", "#1268B3")}
-        ${headerCell("tnl", "Travel + Leisure Co.", "NYSE: TNL", "#2D6A4F")}
+        ${headerCell("mvw", "Marriott Vacations", "NYSE: VAC", "#0862A7")}
+        ${headerCell("hgv", "Hilton Grand Vacations", "NYSE: HGV", "#002C51")}
+        ${headerCell("tnl", "Travel + Leisure Co.", "NYSE: TNL", "#1D6B44")}
         ${scorecardRows}
       </div>
 

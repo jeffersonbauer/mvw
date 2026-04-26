@@ -30,12 +30,12 @@
   --brand-primary: var(--accent-gold);
   --brand-soft: rgba(212, 175, 55, 0.12);
 
-  --mvw-primary: #A6192E;          /* Marriott Red — Pantone 187C */
-  --mvw-soft: rgba(166, 25, 46, 0.18);
-  --hgv-primary: #1268B3;          /* Hilton brand cobalt */
-  --hgv-soft: rgba(18, 104, 179, 0.18);
-  --tnl-primary: #2D6A4F;          /* Travel + Leisure forest */
-  --tnl-soft: rgba(45, 106, 79, 0.18);
+  --mvw-primary: #0862A7;          /* MVW — Pantone PMS 641 C */
+  --mvw-soft: rgba(8, 98, 167, 0.18);
+  --hgv-primary: #002C51;          /* Hilton brand navy */
+  --hgv-soft: rgba(0, 44, 81, 0.30);
+  --tnl-primary: #1D6B44;          /* Travel + Leisure deep forest */
+  --tnl-soft: rgba(29, 107, 68, 0.18);
 
   /* semantic */
   --positive: #4ADE80;
