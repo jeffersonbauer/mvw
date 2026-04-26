@@ -6,22 +6,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
 
 :root {
-  /* surfaces — light executive theme (warm paper feel, ambient brand wash) */
-  --bg-base: #F7F4ED;       /* warm cream — feels like quality stock paper, not cold concrete */
-  --bg-base-rgb: 247, 244, 237;
-  --bg-panel: #FFFFFF;      /* card / panel */
-  --bg-elevated: #F0ECE3;   /* nested surfaces, callouts, scorecard headers */
-  --bg-input: #FAF8F4;
+  /* surfaces — light executive theme (cool stone, balanced contrast) */
+  --bg-base: #E8ECF1;       /* cool stone-blue — calm, not glum, reads as serious neutral */
+  --bg-base-rgb: 232, 236, 241;
+  --bg-panel: #FFFFFF;      /* card / panel — bright white pops against the stone bg */
+  --bg-elevated: #DBE1E9;   /* nested surfaces, callouts, scorecard headers */
+  --bg-input: #F1F4F8;
 
-  /* text */
-  --text-primary: #0F172A;
-  --text-secondary: #475569;
-  --text-tertiary: #94A3B8;
+  /* text — deep slate for primary, mid-slate for secondary, soft for tertiary */
+  --text-primary: #0B1426;     /* near-black with warm-navy undertone */
+  --text-secondary: #3E4D67;
+  --text-tertiary: #7E8AA0;
   --text-inverse: #FFFFFF;
 
   /* borders */
-  --border-subtle: rgba(15, 23, 42, 0.08);
-  --border-strong: rgba(15, 23, 42, 0.16);
+  --border-subtle: rgba(11, 20, 38, 0.10);
+  --border-strong: rgba(11, 20, 38, 0.20);
 
   /* accent */
   --accent-gold: #B8860B;          /* darker gold so it reads on white */
@@ -98,13 +98,7 @@ html, body {
 
 body {
   min-height: 100vh;
-  /* Soft ambient wash: a warm gold halo top-right, a cool MVW-blue hint bottom-left,
-     over a warm cream base. Fixed attachment so the wash doesn't streak on scroll. */
-  background:
-    radial-gradient(ellipse 1400px 700px at 85% -120px, rgba(184, 134, 11, 0.07), transparent 65%),
-    radial-gradient(ellipse 1100px 700px at -10% 110%, rgba(8, 98, 167, 0.045), transparent 70%),
-    var(--bg-base);
-  background-attachment: fixed;
+  background: var(--bg-base);
 }
 
 a { color: var(--brand-primary-on-dark); text-decoration: none; }
@@ -278,6 +272,12 @@ h3 {
 }
 
 .panel + .panel { margin-top: var(--space-5); }
+
+/* When .panel siblings live inside a .grid container they're columns, not a
+   vertical stack. The .panel+.panel margin pushes the 2nd/3rd grid items
+   down by 24px relative to the 1st, which is why MVW used to sit higher
+   than HGV/TNL on the overview. Reset margin in grid contexts. */
+.grid > .panel + .panel { margin-top: 0; }
 
 .panel--accent {
   border-top: 2px solid var(--brand-primary-on-dark);
